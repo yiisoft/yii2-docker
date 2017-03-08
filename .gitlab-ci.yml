@@ -13,8 +13,8 @@ after_script:
   script:
     - docker-compose build --pull ${CI_BUILD_NAME}
     - docker-compose run --rm ${CI_BUILD_NAME} php /tests/requirements.php
-    - curl https://github.com/yiisoft/yii2/archive/master.zip -o yii.zip -L
-    - unzip yii.zip -d tests
+    - curl https://github.com/yiisoft/yii2/archive/master.tar.gz -o yii.tar.gz -L
+    - tar -xzf yii.tar.gz -C tests
     - docker run -v ${PWD}/tests:/tests -w /tests/yii2-master composer install
     - docker-compose run -w /tests/yii2-master --rm ${CI_BUILD_NAME} vendor/bin/phpunit -v --exclude caching,db,data --log-junit tests/_junit/test.xml
 
