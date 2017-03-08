@@ -1,0 +1,14 @@
+version: '2'
+services:
+  php-5.6-apache:
+    build: 5.6/apache
+  php-5.6-fpm:
+    build: 5.6/fpm
+  php-7.0-apache:
+    build: 7.0/apache
+  php-7.0-fpm:
+    build: 7.0/fpm
+  php-7.1-apache:
+    build: 7.1/apache
+  php-7.1-fpm:
+    build: 7.1/fpm

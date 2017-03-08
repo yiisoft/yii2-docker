@@ -1,0 +1,13 @@
+variables:
+  ISOLATION: "buildpipeline${CI_PIPELINE_ID}"
+
+before_script:
+  - export COMPOSE_PROJECT_NAME=${ISOLATION}${CI_BUILD_NAME}
+
+after_script:
+  - export COMPOSE_PROJECT_NAME=${ISOLATION}${CI_BUILD_NAME}
+  - docker-compose down -v
+
+build:
+  script:
+    - docker-compose build --pull
