@@ -13,6 +13,9 @@ after_script:
   script:
     - docker-compose build --pull ${CI_BUILD_NAME}
     - docker-compose run --rm ${CI_BUILD_NAME} php /tests/requirements.php
+    - git clone https://github.com/yiisoft/yii2.git tests/yii2
+    - docker run -v ${PWD}/tests:/tests -w /tests/yii2 composer install
+    - docker-compose run -w /tests/yii2 --rm ${CI_BUILD_NAME} vendor/bin/phpunit -v --exclude caching,db,data --log-junit tests/_junit/test.xml
 
 php-5.6-apache:
   <<: *build
