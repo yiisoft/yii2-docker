@@ -8,32 +8,26 @@ after_script:
   - export COMPOSE_PROJECT_NAME=${ISOLATION}${CI_BUILD_NAME}
   - docker-compose down -v
 
-php-5.6-apache:
+.build: &build
   stage: build
   script:
     - docker-compose build --pull ${CI_BUILD_NAME}
+    - docker-compose run --rm ${CI_BUILD_NAME} php /tests/requirements.php
+
+php-5.6-apache:
+  <<: *build
 
 php-5.6-fpm:
-  stage: build
-  script:
-    - docker-compose build --pull ${CI_BUILD_NAME}
+  <<: *build
 
 php-7.0-apache:
-  stage: build
-  script:
-    - docker-compose build --pull ${CI_BUILD_NAME}
+  <<: *build
 
 php-7.0-fpm:
-  stage: build
-  script:
-    - docker-compose build --pull ${CI_BUILD_NAME}
+  <<: *build
 
 php-7.1-apache:
-  stage: build
-  script:
-    - docker-compose build --pull ${CI_BUILD_NAME}
+  <<: *build
 
 php-7.1-fpm:
-  stage: build
-  script:
-    - docker-compose build --pull ${CI_BUILD_NAME}
+  <<: *build
