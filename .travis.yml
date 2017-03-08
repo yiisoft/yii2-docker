@@ -1,0 +1,28 @@
+language: bash
+services: docker
+
+env:
+  - VERSION=7.1 VARIANT=apache
+  - VERSION=7.1 VARIANT=fpm
+  - VERSION=7.0 VARIANT=apache
+  - VERSION=7.0 VARIANT=fpm
+  - VERSION=5.6 VARIANT=apache
+  - VERSION=5.6 VARIANT=fpm
+
+install: true
+
+before_script:
+  - cd "$VERSION"
+  - image="yii2-php:${VERSION}${VARIANT:+-$VARIANT}"
+  - image="${image//'/'/-}"
+
+script:
+  - travis_retry docker build -t "$image" "${VARIANT:-.}"
+  # TODO: Write actual test script that runs Yii requirement
+  # checker for each image, e.g.:
+  # - tests/run.sh "$image" "$VARIANT"
+
+after_script:
+  - docker images
+
+# vim:set et ts=2 sw=2:
