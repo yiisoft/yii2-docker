@@ -16,3 +16,7 @@ RUN apt-get update \
     # Cleanup to keep the images size small
     && apt-get autoremove -y \
     && rm -r /var/lib/apt/lists/*
+
+# Install composer
+COPY install-composer /install-composer
+RUN /install-composer && rm /install-composer
