@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+
+  php-5.6-apache:
+    build: 5.6/apache
+    extends:
+      service: php-build
+      file: docker-compose.base.yml
+
+  php-5.6-fpm:
+    build: 5.6/fpm
+    extends:
+      service: php-build
+      file: docker-compose.base.yml
+
+  php-7.0-apache:
+    build: 7.0/apache
+    extends:
+      service: php-build
+      file: docker-compose.base.yml
+
+  php-7.0-fpm:
+    build: 7.0/fpm
+    extends:
+      service: php-build
+      file: docker-compose.base.yml
+
+  php-7.1-apache:
+    build: 7.1/apache
+    extends:
+      service: php-build
+      file: docker-compose.base.yml
+
+  php-7.1-fpm:
+    build: 7.1/fpm
+    extends:
+      service: php-build
+      file: docker-compose.base.yml
