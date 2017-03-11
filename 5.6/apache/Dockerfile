@@ -2,6 +2,7 @@ FROM php:5.6.30-apache
 
 RUN apt-get update \
     && apt-get -y install \
+            libicu52 \
             libicu-dev \
 
             # Required by composer
@@ -11,7 +12,6 @@ RUN apt-get update \
 
     # Required extension
     && docker-php-ext-install -j$(nproc) intl \
-    && docker-php-ext-install -j$(nproc) mbstring \
 
     # Additional common extensions
     && docker-php-ext-install -j$(nproc) opcache \
@@ -21,6 +21,10 @@ RUN apt-get update \
     && docker-php-ext-install -j$(nproc) zip \
 
     # Cleanup to keep the images size small
+    && apt-get purge -y \
+        icu-devtools \
+        libicu-dev \
+        zlib1g-dev \
     && apt-get autoremove -y \
     && rm -r /var/lib/apt/lists/*
 
