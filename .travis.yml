@@ -4,13 +4,13 @@ services: docker
 env:
   - VERSION=7.1 VARIANT=apache TYPE=http
   - VERSION=7.1 VARIANT=fpm TYPE=fcgi
-  - VERSION=7.1 VARIANT=fpm-alpine TYPE=fcgi
+  - VERSION=7.1 VARIANT=fpm/alpine TYPE=fcgi
   - VERSION=7.0 VARIANT=apache TYPE=http
   - VERSION=7.0 VARIANT=fpm TYPE=fcgi
-  - VERSION=7.0 VARIANT=fpm-alpine TYPE=fcgi
+  - VERSION=7.0 VARIANT=fpm/alpine TYPE=fcgi
   - VERSION=5.6 VARIANT=apache TYPE=http
   - VERSION=5.6 VARIANT=fpm TYPE=fcgi
-  - VERSION=5.6 VARIANT=fpm-alpine TYPE=fcgi
+  - VERSION=5.6 VARIANT=fpm/alpine TYPE=fcgi
 
 install:
   - git clone https://github.com/yiisoft/yii2.git ~/build/yiisoft/yii2-docker/tests/yii2
