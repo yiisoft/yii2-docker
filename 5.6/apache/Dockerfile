@@ -50,5 +50,5 @@ RUN { \
     && a2enmod rewrite
 
 # Install composer
-COPY install-composer /install-composer
+COPY image-files /
 RUN /install-composer && rm /install-composer

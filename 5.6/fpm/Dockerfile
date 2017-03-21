@@ -29,5 +29,5 @@ RUN apt-get update \
     && rm -r /var/lib/apt/lists/*
 
 # Install composer
-COPY install-composer /install-composer
+COPY image-files /
 RUN /install-composer && rm /install-composer
