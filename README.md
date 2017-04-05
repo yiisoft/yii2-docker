@@ -5,4 +5,4 @@ This is the repo of the official [yii2](http://www.yiiframework.com/)
 
 ## Status
 
-This is still work in progress. The images are note yet available on docker hub.
+This is still work in progress. The images are not yet available on docker hub.
