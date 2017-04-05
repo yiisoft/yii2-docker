@@ -15,13 +15,12 @@ install:
 
 before_script:
   - pwd
-  - cd "$VERSION"
   - image="yii2-php:${VERSION}${VARIANT:+-$VARIANT}"
   - image="${image//'/'/-}"
 
 script:
   # Build min image
-  - travis_retry docker build -t "$image" "$VARIANT"
+  - travis_retry docker build -t "$image" -f "${VERSION}/${VARIANT}/Dockerfile" .
   # TODO: Build other flavours
   #- travis_retry docker build -t "{$image}-common" -f Dockerfile.common "$VARIANT"
   - cd ~/build/yiisoft/yii2-docker/tests
