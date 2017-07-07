@@ -4,24 +4,19 @@ RUN apk add --update --no-cache \
         # Runtime dependencies
         icu-libs \
         libpng \
-        jpeg \
+        libjpeg-turbo \
         freetype \
     && apk add --update --no-cache --virtual .build-deps \
+        $PHPIZE_DEPS \
         # Build dependencies (will be removed after extensions are built)
         icu-dev \
-        jpeg-dev \
         libjpeg-turbo-dev \
         libpng-dev \
         freetype-dev \
-        # Required for APC
-        autoconf \
-        gcc \
-        g++ \
-        make \
     && pecl install apcu-4.0.11 \
     && docker-php-ext-enable apcu \
     && docker-php-ext-configure \
-        gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+        gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
     && docker-php-ext-install \
         # Required extensions
         intl \
