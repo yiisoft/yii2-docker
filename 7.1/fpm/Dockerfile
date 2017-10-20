@@ -31,3 +31,6 @@ RUN apt-get update \
 # Install composer
 COPY install-composer /install-composer
 RUN /install-composer && rm /install-composer
+
+# To change PHP setting, add your php.ini in this directory and uncomment the line, which is lower.
+# COPY php.ini /usr/local/etc/php/
