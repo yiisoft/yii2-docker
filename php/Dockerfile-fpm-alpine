@@ -39,7 +39,6 @@ RUN apk --update --virtual build-deps add \
         mysql-client \
         postgresql && \
     pecl install \
-        apcu \
         imagick \
         mcrypt-1.0.0 && \
     docker-php-ext-configure gd \
@@ -64,23 +63,7 @@ RUN apk --update --virtual build-deps add \
     apk del \
         build-deps
 
-RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/pecl-apcu.ini \
- && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/pecl-imagick.ini
-
-
-# Install xdebug
-RUN export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" && \
-    apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS && \
-    cd /tmp && \
-    git clone git://github.com/xdebug/xdebug.git && \
-    cd xdebug && \
-    git checkout 52adff7539109db592d07d3f6c325f6ee2a7669f && \
-    phpize && \
-    ./configure --enable-xdebug && \
-    make && \
-    make install && \
-    rm -rf /tmp/xdebug && \
-    apk del .phpize-deps
+RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/pecl-imagick.ini
 
 
 # Configure version constraints

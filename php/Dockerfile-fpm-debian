@@ -61,23 +61,10 @@ RUN docker-php-ext-configure gd \
 # Install PECL extensions
 # see http://stackoverflow.com/a/8154466/291573) for usage of `printf`
 RUN printf "\n" | pecl install \
-        apcu-5.1.3 \
         imagick \
         mcrypt-1.0.0 && \
     docker-php-ext-enable \
-        apcu \
         imagick
-
-# Install xdebug
-RUN cd /tmp && \
-    git clone git://github.com/xdebug/xdebug.git && \
-    cd xdebug && \
-    git checkout 52adff7539109db592d07d3f6c325f6ee2a7669f && \
-    phpize && \
-    ./configure --enable-xdebug && \
-    make && \
-    make install && \
-    rm -rf /tmp/xdebug
 
 # Environment settings
 ENV PHP_USER_ID=33 \

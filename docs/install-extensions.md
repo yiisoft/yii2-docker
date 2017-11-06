@@ -1,3 +1,15 @@
+### APC
+
+TBD
+
+    RUN pecl install apc
+    RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/pecl-apcu.ini
+
+---
+
+    RUN docker-php-ext-enable \
+        imagick
+
 ### memcache
 
 Example `Dockerfile` commands for PHP 7 (Alpine)
@@ -33,3 +45,33 @@ Example `Dockerfile` commands for PHP 7 (Debian)
      && docker-php-ext-install /usr/src/php/ext/php-memcached-php7 \
      && rm -rf /usr/src/php/ext/php-memcached-php7 /tmp/memcached.zip
      
+### Xdebug
+
+Alpine
+
+    # Install xdebug
+    RUN export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" && \
+        apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS && \
+        cd /tmp && \
+        git clone git://github.com/xdebug/xdebug.git && \
+        cd xdebug && \
+        git checkout 52adff7539109db592d07d3f6c325f6ee2a7669f && \
+        phpize && \
+        ./configure --enable-xdebug && \
+        make && \
+        make install && \
+        rm -rf /tmp/xdebug && \
+        apk del .phpize-deps
+        
+Debian
+
+    # Install xdebug
+    RUN cd /tmp && \
+        git clone git://github.com/xdebug/xdebug.git && \
+        cd xdebug && \
+        git checkout 52adff7539109db592d07d3f6c325f6ee2a7669f && \
+        phpize && \
+        ./configure --enable-xdebug && \
+        make && \
+        make install && \
+        rm -rf /tmp/xdebug        
