@@ -37,7 +37,6 @@ RUN apk --update --virtual build-deps add \
         libltdl \
         libxml2 \
         mysql-client \
-        nodejs-npm \
         postgresql && \
     pecl install \
         apcu \
@@ -98,13 +97,9 @@ RUN export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" 
     rm -rf /tmp/xdebug && \
     apk del .phpize-deps
 
-# Install less-compiler
-RUN npm install -g yarn
-
 
 # Configure version constraints
 ENV PHP_ENABLE_XDEBUG=0 \
-    VERSION_PRESTISSIMO_PLUGIN=^0.3.7 \
     PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
     TERM=linux \
     COMPOSER_ALLOW_SUPERUSER=1
@@ -115,20 +110,15 @@ COPY image-files/ /
 # Add GITHUB_API_TOKEN support for composer
 RUN chmod 700 \
         /usr/local/bin/docker-entrypoint.sh \
-        /usr/local/bin/docker-run.sh \
         /usr/local/bin/composer
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- \
         --filename=composer.phar \
         --install-dir=/usr/local/bin && \
-    composer global require --optimize-autoloader \
-        "hirak/prestissimo:${VERSION_PRESTISSIMO_PLUGIN}" && \
-    composer global dumpautoload --optimize && \
     composer clear-cache
 
 WORKDIR /app
 
 # Startup script for FPM
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["docker-run.sh"]

@@ -2,7 +2,14 @@ language: bash
 services: docker
 
 env:
-  - PHP_BASE_IMAGE=7.1-fpm
+  - DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE=5.6
+  - DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE=7.0
+  - DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE=7.1
+  - DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE=7.2
+  - DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE=5.6
+  - DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE=7.0
+  - DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE=7.1
+  - DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE=7.2
 
 install:
   - git clone https://github.com/yiisoft/yii2.git ~/build/yiisoft/yii2-docker/tests/yii2

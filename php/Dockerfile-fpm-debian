@@ -33,13 +33,9 @@ RUN apt-get update && \
             mysql-client \
             openssh-client \
             nano \
-            linkchecker \
-            nodejs \
             unzip \
         --no-install-recommends && \
         apt-get clean && \
-        npm -g install npm && \
-        npm -g install npm@5 yarn@1 && \
         rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install PHP extensions required for Yii 2.0 Framework
@@ -98,7 +94,6 @@ RUN set -xe \
 
 ENV PHP_USER_ID=33 \
     PHP_ENABLE_XDEBUG=0 \
-    VERSION_PRESTISSIMO_PLUGIN=^0.3.7 \
     PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
     TERM=linux \
     COMPOSER_ALLOW_SUPERUSER=1
@@ -109,20 +104,15 @@ COPY image-files/ /
 # Add GITHUB_API_TOKEN support for composer
 RUN chmod 700 \
         /usr/local/bin/docker-entrypoint.sh \
-        /usr/local/bin/docker-run.sh \
         /usr/local/bin/composer
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- \
         --filename=composer.phar \
         --install-dir=/usr/local/bin && \
-    composer global require --optimize-autoloader \
-        "hirak/prestissimo:${VERSION_PRESTISSIMO_PLUGIN}" && \
-    composer global dumpautoload --optimize && \
     composer clear-cache
 
 WORKDIR /app
 
 # Startup script for FPM
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["docker-run.sh"]
