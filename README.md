@@ -12,3 +12,20 @@ This is the repo of the official [yii2](http://www.yiiframework.com/)
 ## Status
 
 This is still work in progress. The images are not yet available on docker hub.
+
+## Setup
+
+    cp .env-dist .env
+
+## Building
+
+    docker-compose build
+
+## Testing
+
+    docker-compose run --rm php php /tests/requirements.php
+        
+## Using a specific PHP version
+
+    DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose build
+    DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose run --rm php php /tests/requirements.php   

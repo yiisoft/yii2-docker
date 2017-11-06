@@ -27,6 +27,7 @@ before_script:
 
 script:
   - docker-compose build
+  - docker-compose run --rm php php /tests/requirements.php
 
 after_script:
   - docker images
