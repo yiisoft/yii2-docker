@@ -23,6 +23,7 @@ before_script:
   - docker version
   - docker info
   - docker-compose version
+  - cp .env-dist .env
 
 script:
   - docker-compose build

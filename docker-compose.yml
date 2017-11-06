@@ -12,4 +12,4 @@ services:
       - GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
       - PHP_ENABLE_XDEBUG
     volumes:
-      - ./test:/test
+      - ./tests:/tests
