@@ -2,35 +2,16 @@ language: bash
 services: docker
 
 env:
-  - VERSION=7.1 VARIANT=apache TYPE=http
-  - VERSION=7.1 VARIANT=fpm TYPE=fcgi
-  - VERSION=7.1 VARIANT=fpm/alpine TYPE=fcgi
-  - VERSION=7.0 VARIANT=apache TYPE=http
-  - VERSION=7.0 VARIANT=fpm TYPE=fcgi
-  - VERSION=7.0 VARIANT=fpm/alpine TYPE=fcgi
-  - VERSION=5.6 VARIANT=apache TYPE=http
-  - VERSION=5.6 VARIANT=fpm TYPE=fcgi
-  - VERSION=5.6 VARIANT=fpm/alpine TYPE=fcgi
+  - PHP_BASE_IMAGE=7.1-fpm
 
 install:
   - git clone https://github.com/yiisoft/yii2.git ~/build/yiisoft/yii2-docker/tests/yii2
-  - sudo apt-get install libfcgi0ldbl
 
 before_script:
   - pwd
-  - cd "$VERSION"
-  - image="yii2-php:${VERSION}${VARIANT:+-$VARIANT}"
-  - image="${image//'/'/-}"
 
 script:
-  # Build min image
-  - travis_retry docker build -t "$image" "$VARIANT"
-  # TODO: Build other flavours
-  #- travis_retry docker build -t "{$image}-common" -f Dockerfile.common "$VARIANT"
-  - cd ~/build/yiisoft/yii2-docker/tests
-  - travis_retry ./run.sh "$image" "$TYPE" min
-  # TODO: Test other flavours
-  #- travis_retry ./run.sh "$image-common" "$TYPE" common
+  - docker-compose build
 
 after_script:
   - docker images
