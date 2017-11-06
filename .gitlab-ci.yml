@@ -13,7 +13,4 @@ before_script:
 build:
   script:
     - docker-compose build
-
-test:
-  script:
     - docker-compose run --rm php php /tests/requirements.php
