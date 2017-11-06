@@ -16,6 +16,9 @@ install:
 
 before_script:
   - pwd
+  - docker version
+  - docker info
+  - docker-compose version
 
 script:
   - docker-compose build
