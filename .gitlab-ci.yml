@@ -1,3 +1,8 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
 build:
   script:
     - docker-compose build
