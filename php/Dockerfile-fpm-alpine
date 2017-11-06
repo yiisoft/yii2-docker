@@ -67,21 +67,6 @@ RUN apk --update --virtual build-deps add \
 RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/pecl-apcu.ini \
  && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/pecl-imagick.ini
 
-# memcache
-ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev git
-RUN set -xe \
- && apk add libmemcached \
- && apk add --no-cache \
-     --virtual .memcached-deps \
-     $MEMCACHED_DEPS \
- && curl https://codeload.github.com/php-memcached-dev/php-memcached/zip/php7 -o /tmp/memcached.zip \
- && mkdir -p /usr/src/php/ext \
- && unzip /tmp/memcached.zip -d /usr/src/php/ext \
- && docker-php-ext-configure /usr/src/php/ext/php-memcached-php7 \
-     --disable-memcached-sasl \
- && docker-php-ext-install /usr/src/php/ext/php-memcached-php7 \
- && rm -rf /usr/src/php/ext/php-memcached-php7 /tmp/memcached.zip \
- && apk del .memcached-deps
 
 # Install xdebug
 RUN export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" && \
