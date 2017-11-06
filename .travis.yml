@@ -11,6 +11,10 @@ env:
   - DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1
   - DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install docker-engine
+
 install:
   - git clone https://github.com/yiisoft/yii2.git ~/build/yiisoft/yii2-docker/tests/yii2
 

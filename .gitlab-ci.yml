@@ -3,6 +3,12 @@ image: docker:latest
 services:
   - docker:dind
 
+
+before_script:
+  - docker info
+  - apk add --no-cache python py2-pip
+  - pip install --no-cache-dir docker-compose==1.16.0
+
 build:
   script:
     - docker-compose build
