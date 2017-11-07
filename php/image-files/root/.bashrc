@@ -8,5 +8,6 @@ cat <<'MSG'
    __/ |
   |___/
 
-
 MSG
+
+echo "PHP version: ${PHP_VERSION}"
