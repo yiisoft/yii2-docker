@@ -9,9 +9,9 @@
 This is the repo of the official [yii2](http://www.yiiframework.com/)
 [docker image](https://hub.docker.com/r/yiisoft/yii2-php/) for PHP.
 
-## Status
+> ### Status
+> This is still work in progress. The images are not yet available on docker hub.
 
-This is still work in progress. The images are not yet available on docker hub.
 
 ## Setup
 
@@ -29,12 +29,7 @@ This is still work in progress. The images are not yet available on docker hub.
 
     DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose build
     DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose run --rm php php /tests/requirements.php
-    
-Triggering via Gitlab API
+            
+## FAQ
 
-    curl -X POST \
-         -F token=${GITLAB_TOKEN} \
-         -F ref=feature/refactoring \
-         -F "variables[DOCKERFILE_FLAVOUR]=alpine" \
-         -F "variables[PHP_BASE_IMAGE_VERSION]=7.0.4" \
-         https://gitlab.com/api/v4/projects/2858803/trigger/pipeline    
+- Error code `139` on Alpine for PHP `5.6-7.1` results from a broken ImageMagick installation         
