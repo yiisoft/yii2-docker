@@ -12,8 +12,13 @@ env:
   - DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-rc-fpm
 
 before_install:
+  - export DOCKER_COMPOSE_VERSION=1.16.1
   - sudo apt-get update
   - sudo apt-get install docker-ce
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 install:
   - git clone https://github.com/yiisoft/yii2.git ~/build/yiisoft/yii2-docker/tests/yii2
