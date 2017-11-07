@@ -11,6 +11,8 @@ before_script:
   - cp .env-dist .env
 
 build:
+  environment:
+    name: ${DOCKERFILE_FLAVOUR}/php-${PHP_BASE_IMAGE_VERSION}
   script:
     - docker-compose build
     - docker-compose run --rm php php /tests/requirements.php

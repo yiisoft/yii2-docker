@@ -28,4 +28,13 @@ This is still work in progress. The images are not yet available on docker hub.
 ## Using a specific PHP version
 
     DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose build
-    DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose run --rm php php /tests/requirements.php   
+    DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose run --rm php php /tests/requirements.php
+    
+Triggering via Gitlab API
+
+    curl -X POST \
+         -F token=${GITLAB_TOKEN} \
+         -F ref=feature/refactoring \
+         -F "variables[DOCKERFILE_FLAVOUR]=alpine" \
+         -F "variables[PHP_BASE_IMAGE_VERSION]=7.0.4" \
+         https://gitlab.com/api/v4/projects/2858803/trigger/pipeline    
