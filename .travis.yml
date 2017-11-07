@@ -11,6 +11,12 @@ env:
   - DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1-fpm
   - DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-rc-fpm
 
+allow_failures:
+  # Alpine 5.6-7.1 has a broken ImageMagick installation
+  - DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=5.6-fpm
+  - DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.0-fpm
+  - DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.1-fpm
+
 before_install:
   - export DOCKER_COMPOSE_VERSION=1.16.1
   - sudo apt-get update
