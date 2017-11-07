@@ -3,6 +3,10 @@ image: docker:latest
 services:
   - docker:dind
 
+variables:
+  - DOCKERFILE_FLAVOUR=debian
+  - PHP_BASE_IMAGE_VERSION=fpm
+  - PHP_IMAGE_NAME=yiiframework/php
 
 before_script:
   - docker info
