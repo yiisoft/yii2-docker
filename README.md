@@ -29,6 +29,8 @@ This is the repo of the official [yii2](http://www.yiiframework.com/)
 
     DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose build
     DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose run --rm php php /tests/requirements.php
+    
+**Note:** Please make sure to use a matching combination of `DOCKER`FILE_FLAVOUR` and `PHP_BASE_IMAGE_VERSION   
             
 ## FAQ
 
