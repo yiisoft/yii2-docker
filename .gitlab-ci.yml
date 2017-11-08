@@ -10,11 +10,11 @@ variables:
   TEST_YII_VERSION: master
 
 before_script:
-  - docker info
   - apk add --no-cache python py2-pip git
   - pip install --no-cache-dir docker-compose==1.16.0
   - git clone --depth 1 --branch ${TEST_YII_VERSION} https://github.com/yiisoft/yii2 _host-volumes/app
   - cp .env-dist .env
+  - docker info
 
 build:
   environment:
