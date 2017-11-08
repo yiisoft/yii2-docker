@@ -7,11 +7,13 @@ variables:
   DOCKERFILE_FLAVOUR: debian
   PHP_BASE_IMAGE_VERSION: fpm
   PHP_IMAGE_NAME: yiiframework/php
+  TEST_YII_VERSION: master
 
 before_script:
   - docker info
   - apk add --no-cache python py2-pip
   - pip install --no-cache-dir docker-compose==1.16.0
+  - git clone --depth 1 --branch ${TEST_YII_VERSION} https://github.com/yiisoft/yii2 _host-volumes/app
   - cp .env-dist .env
 
 build:
@@ -20,3 +22,5 @@ build:
   script:
     - docker-compose build
     - docker-compose run --rm php php /tests/requirements.php
+    - docker-compose run --rm php composer install
+    - docker-compose run --rm php vendor/bin/phpunit tests/framework/ --exclude db

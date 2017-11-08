@@ -37,3 +37,5 @@ This is the repo of the official [yii2](http://www.yiiframework.com/)
 ## FAQ
 
 - Error code `139` on Alpine for PHP `5.6-7.1` results from a broken ImageMagick installation         
+
+More information can be found in the [docs](/docs).
