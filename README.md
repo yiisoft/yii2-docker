@@ -6,7 +6,11 @@
     <br>
 </p>
 
+**Stable**
 [![Build Status](https://travis-ci.org/yiisoft/yii2-docker.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-docker)
+**Development**
+[![pipeline status](https://gitlab.com/yiisoft/yii2-docker/badges/master/pipeline.svg)](https://gitlab.com/yiisoft/yii2-docker/commits/master)
+
 
 This is the repo of the official [yii2](http://www.yiiframework.com/)
 [docker image](https://hub.docker.com/r/yiisoft/yii2-php/) for PHP.
