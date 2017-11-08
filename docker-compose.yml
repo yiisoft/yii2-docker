@@ -13,3 +13,6 @@ services:
       - PHP_ENABLE_XDEBUG
     volumes:
       - ./tests:/tests
+      # Framework testing
+      #- ./_host-volumes/app:/app:delegated
+      #- ~/.composer-docker/cache:/root/.composer/cache:delegated
