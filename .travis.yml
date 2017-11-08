@@ -23,6 +23,7 @@ matrix:
     - env: DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.1-fpm-alpine
 
 before_install:
+  - export TEST_YII_VERSION=2.0.13
   - export DOCKER_COMPOSE_VERSION=1.16.1
   - sudo apt-get update
   - sudo apt-get install docker-ce
