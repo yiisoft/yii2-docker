@@ -33,7 +33,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - git clone https://github.com/yiisoft/yii2.git ~/build/yiisoft/yii2-docker/tests/yii2
+  - git clone --depth 1 --branch ${TEST_YII_VERSION} https://github.com/yiisoft/yii2 _host-volumes/app
 
 before_script:
   - pwd
@@ -45,6 +45,8 @@ before_script:
 script:
   - docker-compose build
   - docker-compose run --rm php php /tests/requirements.php
+  - docker-compose run --rm php composer install
+  - docker-compose run --rm php vendor/bin/phpunit tests/framework/ --exclude db
 
 after_script:
   - docker images

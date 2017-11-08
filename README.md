@@ -18,6 +18,11 @@ This is the repo of the official [yii2](http://www.yiiframework.com/)
 ## Setup
 
     cp .env-dist .env
+    
+Adjust the versions in `.env` if you want to build a specific version. 
+
+> **Note:** Please make sure to use a matching combination of `DOCKERFILE_FLAVOUR` and `PHP_BASE_IMAGE_VERSION`
+   
 
 ## Building
 
@@ -26,16 +31,12 @@ This is the repo of the official [yii2](http://www.yiiframework.com/)
 ## Testing
 
     docker-compose run --rm php php /tests/requirements.php
-        
-## Using a specific PHP version
 
-    DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose build
-    DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose run --rm php php /tests/requirements.php
-    
-**Note:** Please make sure to use a matching combination of `DOCKERFILE_FLAVOUR` and `PHP_BASE_IMAGE_VERSION`
-            
+## Documentation
+
+More information can be found in the [docs](/docs) folder.
+                
 ## FAQ
 
 - Error code `139` on Alpine for PHP `5.6-7.1` results from a broken ImageMagick installation         
 
-More information can be found in the [docs](/docs).

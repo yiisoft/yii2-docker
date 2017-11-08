@@ -3,6 +3,10 @@
 Get the source and place it into a host-volume folder for mounting it into the container.
 
     git clone https://github.com/yiisoft/yii2 _host-volumes/app
+    
+Enter the container with 
+
+    docker-compose run --rm php bash    
 
 Go into the container and install packages
 
@@ -15,3 +19,9 @@ Run the tests
 Switching to another framework verion
 
 >     git checkout 2.0.12
+
+
+## Using a specific PHP version
+
+    DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose build
+    DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.1.2-fpm docker-compose run --rm php bash
