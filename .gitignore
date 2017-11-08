@@ -1,3 +1,3 @@
 .env
 *.swp
-tests/yii2
+_host-volumes
