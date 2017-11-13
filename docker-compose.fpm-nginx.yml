@@ -1,0 +1,10 @@
+version: '2'
+services:
+  web:
+    image: phundament/nginx-one:1.9-5.0.2
+    environment:
+      - FASTCGI_PASS_HOST=php
+    volumes:
+      - ./_host-volumes/app:/app:delegated
+    ports:
+      - '8100:80'

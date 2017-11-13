@@ -16,5 +16,3 @@ services:
       # Framework testing
       - ./_host-volumes/app:/app:delegated
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-    ports:
-      - '8000:80'
