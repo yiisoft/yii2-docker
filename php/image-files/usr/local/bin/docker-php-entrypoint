@@ -17,13 +17,10 @@ export PS1="\e[0;35mphd \e[0;37m\u container \h \e[0;32m\w \e[0;0m\n$ "
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
     if [ -x "$(command -v apache2-foreground)" ]; then
-        echo "Apache2"
         set -- apache2-foreground "$@"
     elif [ -x "$(command -v php-fpm)" ]; then
-        echo "fpm"
         set -- php-fpm "$@"
     else
-        echo "CLI"
         set -- php "$@"
     fi
 fi
