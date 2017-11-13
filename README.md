@@ -12,8 +12,7 @@
 [![pipeline status](https://gitlab.com/yiisoft/yii2-docker/badges/master/pipeline.svg)](https://gitlab.com/yiisoft/yii2-docker/commits/master)
 
 
-This is the repo of the official [yii2](http://www.yiiframework.com/)
-[docker image](https://hub.docker.com/r/yiisoft/yii2-php/) for PHP.
+This is the repo of the official [Yii 2.0 Framework](http://www.yiiframework.com/) image on [DockerHub](https://hub.docker.com/r/yiisoftware/yii2-php/) for PHP.
 
 > ### Status
 > This is still work in progress. The images available on docker hub are in **public preview** state.
