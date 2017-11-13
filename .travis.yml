@@ -55,8 +55,6 @@ script:
 
 after_script:
   - docker images
-
-after_success:
   - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
   - docker-compose push
 
