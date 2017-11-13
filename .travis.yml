@@ -29,6 +29,7 @@ matrix:
 before_install:
   - export TEST_YII_VERSION=2.0.12
   - export DOCKER_COMPOSE_VERSION=1.16.1
+  - export PHP_IMAGE_NAME=yiisoftware/yii2-php
   - sudo apt-get update
   - sudo apt-get install docker-ce
   - sudo rm /usr/local/bin/docker-compose
