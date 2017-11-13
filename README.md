@@ -31,20 +31,29 @@ The `Dockerfile`(s) of this repository are design to build various versions by u
 Adjust the versions in `.env` if you want to build a specific version. 
 
 > **Note:** Please make sure to use a matching combination of `DOCKERFILE_FLAVOUR` and `PHP_BASE_IMAGE_VERSION`
-   
+
+
+## Configuration
+
+- `PHP_ENABLE_XDEBUG` whether to load an enable Xdebug, defaults to `0` (false)
+- `PHP_USER_ID` (Debian only) user ID, when running commands
+
 
 ## Building
 
     docker-compose build
 
+
 ## Testing
 
     docker-compose run --rm php php /tests/requirements.php
 
+
 ## Documentation
 
 More information can be found in the [docs](/docs) folder.
-                
+
+
 ## FAQ
 
 - Error code `139` on Alpine for PHP `5.6-7.1` results from a broken ImageMagick installation         
