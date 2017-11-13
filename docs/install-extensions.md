@@ -1,3 +1,9 @@
+## Installing additional extensions
+
+### Composer asset plugin
+
+    RUN composer global require "fxp/composer-asset-plugin:^1.4.2"
+
 ### APC
 
 TBD
