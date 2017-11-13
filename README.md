@@ -18,6 +18,12 @@ This is the repo of the official [yii2](http://www.yiiframework.com/)
 > ### Status
 > This is still work in progress. The images are not yet available on docker hub.
 
+## About
+
+These Docker images are built on top of the official PHP Docker image, they contain additional PHP extensions required to run Yii 2.0 framework.
+The `Dockerfile`(s) of this repository are design to build various versions by using *build arguments*.
+
+
 
 ## Setup
 
