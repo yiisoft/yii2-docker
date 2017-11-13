@@ -77,7 +77,7 @@ COPY image-files/ /
 
 # Add GITHUB_API_TOKEN support for composer
 RUN chmod 700 \
-        /usr/local/bin/docker-entrypoint.sh \
+        /usr/local/bin/docker-php-entrypoint \
         /usr/local/bin/composer
 
 # Install composer
@@ -86,7 +86,5 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
         --install-dir=/usr/local/bin && \
     composer clear-cache
 
+# Application environment
 WORKDIR /app
-
-# Startup script for FPM
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
