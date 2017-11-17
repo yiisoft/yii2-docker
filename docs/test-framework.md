@@ -6,7 +6,7 @@ Get the source and place it into a host-volume folder for mounting it into the c
     
 Enter the container with 
 
-    docker-compose run --rm php bash    
+    docker-compose run --rm -w /yii2 php bash    
 
 Go into the container and install packages
 
