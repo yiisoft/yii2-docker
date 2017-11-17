@@ -57,7 +57,8 @@ after_script:
   - docker images
 
 after_success:
-  - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS
-  - docker-compose push
+  - test $TRAVIS_BRANCH = "master" &&
+    docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS &&
+    docker-compose push
 
 # vim:set et ts=2 sw=2:
