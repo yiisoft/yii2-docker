@@ -21,6 +21,7 @@ build:
     name: ${DOCKERFILE_FLAVOUR}/php-${PHP_BASE_IMAGE_VERSION}
   script:
     - docker-compose build
+    - docker-compose run --rm php php -v
     - docker-compose run --rm php php /tests/requirements.php
     - docker-compose run --rm php composer install
     - docker-compose run --rm php vendor/bin/phpunit tests/framework/ --exclude db

@@ -51,6 +51,7 @@ script:
   - echo "travis_fold:start:BUILD folding starts"
   - docker-compose build
   - echo "travis_fold:end:BUILD folding ends"
+  - docker-compose run --rm php php -v
   - docker-compose run --rm php php /tests/requirements.php
   - docker-compose run --rm php composer install
   - docker-compose run --rm php vendor/bin/phpunit tests/framework/ --exclude db
