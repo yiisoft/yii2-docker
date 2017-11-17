@@ -27,7 +27,7 @@ matrix:
     - env: DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-rc-apache
 
 before_install:
-  - export TEST_YII_VERSION=2.0.12
+  - export TEST_YII_VERSION=2.0.13.1
   - export DOCKER_COMPOSE_VERSION=1.16.1
   - export PHP_IMAGE_NAME=yiisoftware/yii2-php
   - sudo apt-get update
