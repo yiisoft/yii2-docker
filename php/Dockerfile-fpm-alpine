@@ -38,9 +38,6 @@ RUN apk --update --virtual build-deps add \
         libxml2 \
         mysql-client \
         postgresql && \
-    pecl install \
-        imagick \
-        mcrypt-1.0.0 && \
     docker-php-ext-configure gd \
         --with-gd \
         --with-freetype-dir=/usr/include/ \
@@ -57,9 +54,12 @@ RUN apk --update --virtual build-deps add \
         iconv \
         intl \
         mbstring \
+        mcrypt \
         opcache \
         pdo_mysql \
         pdo_pgsql && \
+    pecl install \
+        imagick && \
     apk del \
         build-deps
 

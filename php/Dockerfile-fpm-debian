@@ -19,7 +19,6 @@ RUN apt-get update && \
             libfreetype6-dev \
             libcurl3-dev \
             libicu-dev \
-            libmcrypt-dev \
             libfreetype6-dev \
             libjpeg-dev \
             libjpeg62-turbo-dev \
@@ -53,6 +52,7 @@ RUN docker-php-ext-configure gd \
         iconv \
         intl \
         mbstring \
+        mcrypt \
         opcache \
         pdo_mysql \
         pdo_pgsql
@@ -61,7 +61,6 @@ RUN docker-php-ext-configure gd \
 # see http://stackoverflow.com/a/8154466/291573) for usage of `printf`
 RUN printf "\n" | pecl install \
         imagick \
-        mcrypt-1.0.0 && \
     docker-php-ext-enable \
         imagick
 
