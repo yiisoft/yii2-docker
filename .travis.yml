@@ -30,6 +30,7 @@ before_install:
   - export TEST_YII_VERSION=2.0.13.1
   - export DOCKER_COMPOSE_VERSION=1.16.1
   - export PHP_IMAGE_NAME=yiisoftware/yii2-php
+  - if [ -n "$TRAVIS_TAG" ]; then export PHP_IMAGE_VERSION_SUFFIX=-${TRAVIS_TAG}; fi
   - sudo apt-get update
   - sudo apt-get install docker-ce
   - sudo rm /usr/local/bin/docker-compose
