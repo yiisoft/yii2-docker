@@ -22,9 +22,9 @@ matrix:
     - env: DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.0-fpm-alpine
     - env: DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.1-fpm-alpine
     # PHP 7.2 not compatible with Yii < 2.0.13
-    - env: DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.2-rc-fpm-alpine
-    - env: DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-rc-fpm
-    - env: DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-rc-apache
+    - env: DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.2-fpm-alpine
+    - env: DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-fpm
+    - env: DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-apache
 
 before_install:
   - export TEST_YII_VERSION=2.0.13.1
