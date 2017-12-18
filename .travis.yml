@@ -63,7 +63,7 @@ after_script:
 after_success:
   - if [[ $TRAVIS_BRANCH = "master" || -n "$TRAVIS_TAG" ]]; then
       docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS &&
-      docker-compose push
+      docker-compose push;
     fi
 
 # vim:set et ts=2 sw=2:
