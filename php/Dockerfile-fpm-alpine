@@ -17,7 +17,6 @@ RUN apk --update --virtual build-deps add \
         imagemagick-dev \
         pcre-dev \
         postgresql-dev \
-        libmcrypt-dev \
         libjpeg-turbo-dev \
         libpng-dev \
         libxml2-dev && \
@@ -30,7 +29,6 @@ RUN apk --update --virtual build-deps add \
         imagemagick \
         pcre \
         freetype \
-        libmcrypt \
         libintl \
         libjpeg-turbo \
         libpng \
@@ -54,7 +52,6 @@ RUN apk --update --virtual build-deps add \
         iconv \
         intl \
         mbstring \
-        mcrypt \
         opcache \
         pdo_mysql \
         pdo_pgsql && \

@@ -23,7 +23,6 @@ RUN apt-get update && \
             libjpeg-dev \
             libjpeg62-turbo-dev \
             libmagickwand-dev \
-            libmcrypt-dev \
             libpq-dev \
             libpng-dev \
             libxml2-dev \
@@ -52,7 +51,6 @@ RUN docker-php-ext-configure gd \
         iconv \
         intl \
         mbstring \
-        mcrypt \
         opcache \
         pdo_mysql \
         pdo_pgsql
@@ -60,7 +58,7 @@ RUN docker-php-ext-configure gd \
 # Install PECL extensions
 # see http://stackoverflow.com/a/8154466/291573) for usage of `printf`
 RUN printf "\n" | pecl install \
-        imagick \
+        imagick && \
     docker-php-ext-enable \
         imagick
 

@@ -4,9 +4,35 @@
 
     RUN composer global require "fxp/composer-asset-plugin:^1.4.2"
 
+### mcrypt
+
+#### Alpine
+
+```
+RUN apk --update --virtual build-deps add \
+        libmcrypt-dev && \
+    apk add \
+        libmcrypt && \
+    docker-php-ext-install \
+        mcrypt && \
+    apk del \
+        build-deps            
+```
+
+#### Debian
+
+```
+RUN apt-get update && \
+    apt-get -y install \
+        libmcrypt-dev && \
+    docker-php-ext-install \
+        mycrypt        
+```
+
+
 ### APC
 
-TBD
+*TBD*
 
     RUN pecl install apc
     RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/pecl-apcu.ini
@@ -18,7 +44,7 @@ TBD
 
 ### memcache
 
-Example `Dockerfile` commands for PHP 7 (Alpine)
+#### Alpine (PHP 7)
 
     # memcache
     ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev git
@@ -36,7 +62,7 @@ Example `Dockerfile` commands for PHP 7 (Alpine)
      && rm -rf /usr/src/php/ext/php-memcached-php7 /tmp/memcached.zip \
      && apk del .memcached-deps
 
-Example `Dockerfile` commands for PHP 7 (Debian)     
+#### Debian (PHP 7)     
      
     # memcache
     ENV MEMCACHED_DEPS libmemcached-dev git
@@ -53,7 +79,7 @@ Example `Dockerfile` commands for PHP 7 (Debian)
      
 ### Xdebug
 
-Alpine
+#### Alpine
 
     # Install xdebug
     RUN export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" && \
@@ -69,7 +95,7 @@ Alpine
         rm -rf /tmp/xdebug && \
         apk del .phpize-deps
         
-Debian
+#### Debian
 
     # Install xdebug
     RUN cd /tmp && \
