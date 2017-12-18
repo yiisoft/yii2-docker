@@ -67,6 +67,7 @@ ENV PHP_USER_ID=33 \
     PHP_ENABLE_XDEBUG=0 \
     PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
     TERM=linux \
+    VERSION_PRESTISSIMO_PLUGIN=^0.3.7 \
     COMPOSER_ALLOW_SUPERUSER=1
 
 # Add configuration files
@@ -81,6 +82,12 @@ RUN chmod 700 \
 RUN curl -sS https://getcomposer.org/installer | php -- \
         --filename=composer.phar \
         --install-dir=/usr/local/bin && \
+    composer clear-cache
+
+# Install composer plugins
+RUN composer global require --optimize-autoloader \
+        "hirak/prestissimo:${VERSION_PRESTISSIMO_PLUGIN}" && \
+    composer global dumpautoload --optimize && \
     composer clear-cache
 
 # Application environment
