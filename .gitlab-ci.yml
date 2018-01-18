@@ -12,7 +12,7 @@ variables:
 before_script:
   - apk add --no-cache python py2-pip git
   - pip install --no-cache-dir docker-compose==1.16.0
-  - git clone --depth 1 --branch ${TEST_YII_VERSION} https://github.com/yiisoft/yii2 _host-volumes/app
+  - git clone --depth 1 --branch ${TEST_YII_VERSION} https://github.com/yiisoft/yii2 _host-volumes/yii2
   - cp .env-dist .env
   - docker info
 
@@ -23,5 +23,5 @@ build:
     - docker-compose build
     - docker-compose run --rm php php -v
     - docker-compose run --rm php php /tests/requirements.php
-    - docker-compose run --rm php composer install
-    - docker-compose run --rm php vendor/bin/phpunit tests/framework/ --exclude db
+    - docker-compose run --rm -w /yii2 php composer install
+    - docker-compose run --rm -w /yii2 php php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db

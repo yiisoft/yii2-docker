@@ -39,7 +39,7 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - git clone --depth 1 --branch ${TEST_YII_VERSION} https://github.com/yiisoft/yii2 _host-volumes/app
+  - git clone --depth 1 --branch ${TEST_YII_VERSION} https://github.com/yiisoft/yii2 _host-volumes/yii2
 
 before_script:
   - pwd
@@ -54,8 +54,8 @@ script:
   - echo "travis_fold:end:BUILD folding ends"
   - docker-compose run --rm php php -v
   - docker-compose run --rm php php /tests/requirements.php
-  - docker-compose run --rm php composer install
-  - docker-compose run --rm php vendor/bin/phpunit tests/framework/ --exclude db
+  - docker-compose run --rm -w /yii2 php composer install
+  - docker-compose run --rm -w /yii2 php php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
 
 after_script:
   - docker images

@@ -11,8 +11,9 @@ services:
     environment:
       - GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
       - PHP_ENABLE_XDEBUG
+      - TEST_RUNTIME_PATH=/tmp/runtime
     volumes:
-      - ./tests:/tests
+      - ./tests:/tests:delegated
       # Framework testing
       - ./_host-volumes/yii2:/yii2:delegated
       # Application testing
