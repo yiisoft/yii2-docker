@@ -40,7 +40,6 @@ before_install:
 
 install:
   - git clone https://github.com/yiisoft/yii2 _host-volumes/yii2
-  - cd _host-volumes/yii2
   - pushd _host-volumes/yii2 && git checkout ${TEST_YII_VERSION} && popd
   - cp .env-dist .env
 
