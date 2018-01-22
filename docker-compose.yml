@@ -3,7 +3,7 @@ services:
 
   php:
     build:
-      dockerfile: Dockerfile-fpm-${DOCKERFILE_FLAVOUR}
+      dockerfile: Dockerfile-${DOCKERFILE_FLAVOUR}
       context: 'php'
       args:
         - PHP_BASE_IMAGE_VERSION=${PHP_BASE_IMAGE_VERSION}

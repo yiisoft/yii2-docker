@@ -93,4 +93,5 @@ RUN composer global require --optimize-autoloader \
 # Application environment
 WORKDIR /app
 
-RUN rm -rf /var/www/html && ln -s /app/web/ /var/www/html
+# Create a symlink for apache (if `/var/www/html` is available)
+RUN rm -rf /var/www/html && ln -s /app/web/ /var/www/html || true
