@@ -17,14 +17,11 @@ env:
 
 matrix:
   allow_failures:
-    # Alpine 5.6-7.1 has a broken ImageMagick installation
+    # Alpine 5.6-7.1 have a broken ImageMagick installation, 7.2 does not pass all framework tests
     - env: DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=5.6-fpm-alpine
     - env: DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.0-fpm-alpine
     - env: DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.1-fpm-alpine
-    # PHP 7.2 not compatible with Yii < 2.0.13
     - env: DOCKERFILE_FLAVOUR=alpine PHP_BASE_IMAGE_VERSION=7.2-fpm-alpine
-    - env: DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-fpm
-    - env: DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-apache
 
 before_install:
   - export TEST_YII_VERSION=6b0be47e0fa9c532e03b07b4369050582fcf5c7a
