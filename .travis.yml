@@ -27,7 +27,7 @@ matrix:
     - env: DOCKERFILE_FLAVOUR=debian PHP_BASE_IMAGE_VERSION=7.2-apache
 
 before_install:
-  - export TEST_YII_VERSION=master
+  - export TEST_YII_VERSION=6b0be47e0fa9c532e03b07b4369050582fcf5c7a
   - export DOCKER_COMPOSE_VERSION=1.16.1
   - export PHP_IMAGE_NAME=yiisoftware/yii2-php
   - if [ -n "$TRAVIS_TAG" ]; then export PHP_IMAGE_VERSION_SUFFIX=-${TRAVIS_TAG}; fi
@@ -39,14 +39,16 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - git clone --depth 1 --branch ${TEST_YII_VERSION} https://github.com/yiisoft/yii2 _host-volumes/yii2
+  - git clone https://github.com/yiisoft/yii2 _host-volumes/yii2
+  - cd _host-volumes/yii2
+  - pushd _host-volumes/yii2 && git checkout ${TEST_YII_VERSION} && popd
+  - cp .env-dist .env
 
 before_script:
   - pwd
   - docker version
   - docker info
   - docker-compose version
-  - cp .env-dist .env
 
 script:
   - echo "travis_fold:start:BUILD folding starts"
