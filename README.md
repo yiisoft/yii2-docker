@@ -36,7 +36,7 @@ Adjust the versions in `.env` if you want to build a specific version.
 ## Configuration
 
 - `PHP_ENABLE_XDEBUG` whether to load an enable Xdebug, defaults to `0` (false)
-- `PHP_USER_ID` (Debian only) user ID, when running commands
+- `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`)
 
 
 ## Building
