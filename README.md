@@ -19,8 +19,8 @@ This is the repo of the official [Yii 2.0 Framework](http://www.yiiframework.com
 
 ## About
 
-These Docker images are built on top of the official PHP Docker image, they contain additional PHP extensions required to run Yii 2.0 framework.
-The `Dockerfile`(s) of this repository are design to build various versions by using *build arguments*.
+These Docker images are built on top of the official PHP Docker image, they contain additional PHP extensions required to run Yii 2.0 framework, but no code of the framework itself.
+The `Dockerfile`(s) of this repository are designed to build from different PHP-versions by using *build arguments*.
 
 
 
@@ -36,7 +36,7 @@ Adjust the versions in `.env` if you want to build a specific version.
 ## Configuration
 
 - `PHP_ENABLE_XDEBUG` whether to load an enable Xdebug, defaults to `0` (false)
-- `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`)
+- `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`), see also [#15](https://github.com/yiisoft/yii2-docker/issues/15)
 
 
 ## Building
