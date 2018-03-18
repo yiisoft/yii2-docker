@@ -30,11 +30,6 @@ The `Dockerfile`(s) of this repository are designed to build from different PHP-
 
 Adjust the versions in `.env` if you want to build a specific version.
 
-If you want to add mysql and phpmyadmin support:
-
-    cp .env-dist.mysql-and-phpmyadmin .env
-
-
 > **Note:** Please make sure to use a matching combination of `DOCKERFILE_FLAVOUR` and `PHP_BASE_IMAGE_VERSION`
 
 
@@ -43,14 +38,6 @@ If you want to add mysql and phpmyadmin support:
 - `PHP_ENABLE_XDEBUG` whether to load an enable Xdebug, defaults to `0` (false)
 - `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`), see also [#15](https://github.com/yiisoft/yii2-docker/issues/15)
 
-
-If you are using environment with mysql-and-phpmyadmin, these are other settings:
-
-- `MYSQL_HOST` host to connect to mysql server
-- `MYSQL_DATABASE` name of a databased created at boot
-- `MYSQL_ROOT_PASSWORD` password of root user
-- `MYSQL_USER` username of user created at boot
-- `MYSQL_PASSWORD` password of user created at boot
 
 ## Building
 
@@ -61,7 +48,22 @@ If you are using environment with mysql-and-phpmyadmin, these are other settings
 
     docker-compose run --rm php php /tests/requirements.php
 
+
 ## MySQL and PhpMyAdmin support
+
+If you want to add mysql and phpmyadmin support, copy .env-dist.mysql-and-phpmyadmin file instead .env-dist
+
+    cp .env-dist.mysql-and-phpmyadmin .env
+
+You have other settings that can be changed:
+
+- `MYSQL_HOST` host to connect to mysql server
+- `MYSQL_DATABASE` name of a databased created at boot
+- `MYSQL_ROOT_PASSWORD` password of root user
+- `MYSQL_USER` username of user created at boot
+- `MYSQL_PASSWORD` password of user created at boot    
+
+To test MySQL and PhpMyAdmin support, start the services
 
     docker-compose up -d
 
