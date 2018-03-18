@@ -55,6 +55,10 @@ If you want to add mysql and phpmyadmin support, copy .env-dist.mysql-and-phpmya
 
     cp .env-dist.mysql-and-phpmyadmin .env
 
+the rebuild:
+
+    docker-compose build
+
 You have other settings that can be changed:
 
 - `MYSQL_HOST` host to connect to mysql server
@@ -79,7 +83,7 @@ To test mysql connection inside the php container, connect to it
 
     docker exec -it yii2apache_php_1 bash
 
-(change yii2apache_php_1 with php container name if is different)
+(adjust yii2apache_php_1 with php container name if is different)
 
 and then try to connect to mysql:
 
