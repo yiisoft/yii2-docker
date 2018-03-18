@@ -1,0 +1,32 @@
+version: '2'
+services:
+
+    php:
+        depends_on:
+            - phpmyadmin
+            - mysql
+
+    phpmyadmin:
+        image: ${PHPMYADMIN_IMAGE_NAME}
+        container_name: phpmyadmin
+        ports:
+            - '8888:80'
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_HOST=${MYSQL_HOST}
+        depends_on:
+            - mysql
+
+
+    mysql:
+        image: ${MYSQL_IMAGE_NAME}
+        container_name: ${MYSQL_HOST}
+        environment:
+            - MYSQL_DATABASE=${MYSQL_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+            - '3306:3306'
+        volumes:
+            - ./data/db/mysql:/var/lib/mysql

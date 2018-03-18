@@ -27,8 +27,13 @@ The `Dockerfile`(s) of this repository are designed to build from different PHP-
 ## Setup
 
     cp .env-dist .env
-    
-Adjust the versions in `.env` if you want to build a specific version. 
+
+Adjust the versions in `.env` if you want to build a specific version.
+
+If you want to add mysql and phpmyadmin support:
+
+    cp .env-dist.mysql-and-phpmyadmin .env
+
 
 > **Note:** Please make sure to use a matching combination of `DOCKERFILE_FLAVOUR` and `PHP_BASE_IMAGE_VERSION`
 
@@ -39,6 +44,14 @@ Adjust the versions in `.env` if you want to build a specific version.
 - `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`), see also [#15](https://github.com/yiisoft/yii2-docker/issues/15)
 
 
+If you are using environment with mysql-and-phpmyadmin, these are other settings:
+
+- `MYSQL_HOST` host to connect to mysql server
+- `MYSQL_DATABASE` name of a databased created at boot
+- `MYSQL_ROOT_PASSWORD` password of root user
+- `MYSQL_USER` username of user created at boot
+- `MYSQL_PASSWORD` password of user created at boot
+
 ## Building
 
     docker-compose build
@@ -48,6 +61,31 @@ Adjust the versions in `.env` if you want to build a specific version.
 
     docker-compose run --rm php php /tests/requirements.php
 
+## MySQL and PhpMyAdmin support
+
+    docker-compose up -d
+
+To connect to PhpMyAdmin, go to http://localhost:8888 and type:
+
+- `mysql` as server
+- `root` as username (or dev)
+- `root` as password (or dev)
+
+These values can be changed inside `.env-dist.mysql-and-phpmyadmin` file.
+
+To test mysql connection inside the php container, connect to it
+
+    docker exec -it yii2apache_php_1 bash
+
+(change yii2apache_php_1 with php container name if is different)
+
+and then try to connect to mysql:
+
+    mysql -h mysql -u root -proot
+
+and you should enter inside mysql console.
+
+Now you can connect to mysql also from Yii app.
 
 ## Documentation
 
@@ -57,4 +95,3 @@ More information can be found in the [docs](/docs) folder.
 ## FAQ
 
 - Error code `139` on Alpine for PHP `5.6-7.1` results from a broken ImageMagick installation         
-
