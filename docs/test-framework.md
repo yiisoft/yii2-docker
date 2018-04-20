@@ -16,7 +16,7 @@ Run the tests
 
 >     vendor/bin/phpunit tests/framework/ --exclude db
 
-Switching to another framework verion
+Switching to another framework version
 
 >     git checkout 2.0.12
 
