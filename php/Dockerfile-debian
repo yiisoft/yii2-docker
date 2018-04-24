@@ -95,3 +95,7 @@ WORKDIR /app
 
 # Create a symlink for apache (if `/var/www/html` is available)
 RUN rm -rf /var/www/html && ln -s /app/web/ /var/www/html || true
+
+# Enable mod_rewrite for images with apache
+RUN if command -v a2enmod >/dev/null 2>&1; \
+    then a2enmod rewrite; fi
