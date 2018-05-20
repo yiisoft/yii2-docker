@@ -94,5 +94,9 @@ RUN composer global require --optimize-autoloader \
 RUN if command -v a2enmod >/dev/null 2>&1; \
     then a2enmod rewrite; fi
 
+# Enable mod_headers for images with apache
+RUN if command -v a2enmod >/dev/null 2>&1; \
+    then a2enmod headers; fi
+
 # Application environment
 WORKDIR /app

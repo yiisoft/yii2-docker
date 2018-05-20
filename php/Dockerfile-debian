@@ -99,3 +99,7 @@ RUN rm -rf /var/www/html && ln -s /app/web/ /var/www/html || true
 # Enable mod_rewrite for images with apache
 RUN if command -v a2enmod >/dev/null 2>&1; \
     then a2enmod rewrite; fi
+
+# Enable mod_headers for images with apache
+RUN if command -v a2enmod >/dev/null 2>&1; \
+    then a2enmod headers; fi
