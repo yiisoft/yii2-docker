@@ -60,7 +60,7 @@ after_script:
 
 after_success:
   - if [[ $TRAVIS_BRANCH = "master" || -n "$TRAVIS_TAG" ]]; then
-      docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASS &&
+      echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER -p  &&
       docker-compose push;
     fi
 
