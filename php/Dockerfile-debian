@@ -62,9 +62,9 @@ RUN printf "\n" | pecl install \
     docker-php-ext-enable \
         imagick
     printf "\n" | pecl install \
-        mongo && \
+        mongodb && \
     docker-php-ext-enable \
-        mongo
+        mongodb
 
 # Environment settings
 ENV PHP_USER_ID=33 \
