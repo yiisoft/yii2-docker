@@ -56,8 +56,7 @@ RUN apk --update --virtual build-deps add \
         pdo_mysql \
         pdo_pgsql && \
     pecl install \
-        imagick && \
-    pecl install \
+        imagick \
         mongodb && \
     apk del \
         build-deps
