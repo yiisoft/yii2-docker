@@ -56,11 +56,13 @@ RUN apk --update --virtual build-deps add \
         pdo_mysql \
         pdo_pgsql && \
     pecl install \
-        imagick && \
+        imagick \
+        mongodb && \
     apk del \
         build-deps
 
-RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/pecl-imagick.ini
+RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/pecl-imagick.ini && \
+    echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/pecl-mongodb.ini
 
 
 # Configure version constraints

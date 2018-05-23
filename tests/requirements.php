@@ -77,6 +77,13 @@ $requirements = array(
         'by' => 'All DB-related classes',
         'memo' => 'Required for PostgreSQL database.',
     ),
+    array(
+        'name' => 'MongoDB extension',
+        'mandatory' => false,
+        'condition' => extension_loaded('mongodb'),
+        'by' => '<a href="https://www.yiiframework.com/extension/yiisoft/yii2-mongodb/doc/guide/2.2/en">MongoDB</a>',
+        'memo' => 'Required for MongoDB database.',
+    ),
     // Cache :
     /*array(
         'name' => 'Memcache extension',
