@@ -22,7 +22,12 @@ This is the repo of the official [Yii 2.0 Framework](http://www.yiiframework.com
 These Docker images are built on top of the official PHP Docker image, they contain additional PHP extensions required to run Yii 2.0 framework, but no code of the framework itself.
 The `Dockerfile`(s) of this repository are designed to build from different PHP-versions by using *build arguments*.
 
+### Available versions
 
+```
+7.2-apache, 7.1-apache, 7.0-apache, 5.6-apache
+7.2-fpm, 7.1-fpm, 7.0-fpm, 5.6-fpm
+```
 
 ## Setup
 
