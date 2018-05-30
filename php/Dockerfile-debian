@@ -95,9 +95,10 @@ RUN composer global require --optimize-autoloader \
 # Application environment
 WORKDIR /app
 
-# Create a symlink for apache (if `/var/www/html` is available)
-RUN if [ -d "/app/web" ]; then
-        rm -rf /var/www/html && ln -s /app/web/ /var/www/html
+# Create a symlink for apache (if `/app/web` is available)
+RUN if [ -d "/app/web" ]; then \
+        rm -rf /var/www/html && \
+        ln -s /app/web/ /var/www/html || true; \
     fi
 
 # Enable mod_rewrite for images with apache
