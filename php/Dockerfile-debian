@@ -95,6 +95,9 @@ RUN composer global require --optimize-autoloader \
 # Application environment
 WORKDIR /app
 
+# Create a index file for apache (if `/var/www/html` is available)
+RUN echo "<center><h1>Hello from Yii framework!</h1></center>" > /var/www/html/index.php;
+
 # Create a symlink for apache (if `/var/www/html` is available)
 RUN rm -rf /var/www/html && ln -s /app/web/ /var/www/html || true
 
