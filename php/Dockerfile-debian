@@ -105,3 +105,7 @@ RUN if command -v a2enmod >/dev/null 2>&1; \
 # Enable mod_headers for images with apache
 RUN if command -v a2enmod >/dev/null 2>&1; \
     then a2enmod headers; fi
+
+# Install bash autocompilation
+RUN curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii \
+        -o /etc/bash_completion.d/yii
