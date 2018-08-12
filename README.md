@@ -50,6 +50,12 @@ Adjust the versions in `.env` if you want to build a specific version.
 
     docker-compose run --rm php php /tests/requirements.php
 
+## Xdebug
+
+To enable Xdebug, set `PHP_ENABLE_XDEBUG=1` in .env file
+
+Xdebug is configured to call ip 10.254.254.254 on 9005 port (not use standard port to avoid conflicts),
+so you have to configure your IDE to receive connections from that ip.
 
 ## MySQL and PhpMyAdmin support
 
