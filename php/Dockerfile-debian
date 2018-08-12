@@ -90,6 +90,10 @@ RUN composer global require --optimize-autoloader \
     composer global dumpautoload --optimize && \
     composer clear-cache
 
+# Check if Apache rewite module need to be enabled
+ARG APACHE_REWRITE_ENABLED
+RUN if [ -n "${APACHE_REWRITE_ENABLED}" ] && [ "${APACHE_REWRITE_ENABLED}" -eq 1 ] ; then a2enmod rewrite ; fi
+
 # Application environment
 WORKDIR /app
 
