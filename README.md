@@ -57,6 +57,10 @@ To enable Xdebug, set `PHP_ENABLE_XDEBUG=1` in .env file
 Xdebug is configured to call ip 10.254.254.254 on 9005 port (not use standard port to avoid conflicts),
 so you have to configure your IDE to receive connections from that ip.
 
+The port 9005 is enabled in docker-compose.apache.yml and to activate ip 10.254.254.254 locally, on MacOS the command is: 
+
+    ifconfig lo0 alias 10.254.254.254
+
 ## MySQL and PhpMyAdmin support
 
 If you want to add mysql and phpmyadmin support, copy .env-dist.mysql-and-phpmyadmin file instead .env-dist
