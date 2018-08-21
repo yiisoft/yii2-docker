@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get -y install \
         gnupg2 && \
     apt-key update && \
-    apt-get update && \
+#    apt-get update && \    this is deprecated and should be removed?
     apt-get -y install \
             g++ \
             git \
