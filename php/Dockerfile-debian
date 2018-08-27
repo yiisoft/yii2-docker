@@ -105,23 +105,13 @@ RUN composer global require --optimize-autoloader \
     composer global dumpautoload --optimize && \
     composer clear-cache
 
-# Check if Apache rewite module need to be enabled
-ARG APACHE_ENABLE_REWRITE
-RUN if [ 0 -ne "${APACHE_ENABLE_REWRITE:-0}" ] ; then a2enmod rewrite ; fi
-
-# Application environment
-WORKDIR /app
-
 # Create a symlink for apache (if `/var/www/html` is available)
 RUN rm -rf /var/www/html && ln -s /app/web/ /var/www/html || true
 
 # Enable mod_rewrite for images with apache
-RUN if command -v a2enmod >/dev/null 2>&1; \
-    then a2enmod rewrite; fi
-
-# Enable mod_headers for images with apache
-RUN if command -v a2enmod >/dev/null 2>&1; \
-    then a2enmod headers; fi
+RUN if command -v a2enmod >/dev/null 2>&1; then \
+        a2enmod rewrite headers \
+    ;fi
 
 # Install Yii framework bash autocompletion
 RUN curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii \

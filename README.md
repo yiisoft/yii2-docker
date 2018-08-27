@@ -39,7 +39,6 @@ Adjust the versions in `.env` if you want to build a specific version.
 
 - `PHP_ENABLE_XDEBUG` whether to load an enable Xdebug, defaults to `0` (false)
 - `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`), see also [#15](https://github.com/yiisoft/yii2-docker/issues/15)
-- `APACHE_ENABLE_REWRITE` whether to load or enable apache2 mod_rewrite, defaults to `1` (true)
 
 
 ## Building
