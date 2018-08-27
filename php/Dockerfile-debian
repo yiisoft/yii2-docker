@@ -64,6 +64,19 @@ RUN printf "\n" | pecl install \
         imagick \
         mongodb
 
+# Check if Xdebug extension need to be compiled
+ARG PHP_ENABLE_XDEBUG
+RUN if [ 0 -ne "${PHP_ENABLE_XDEBUG:-0}" ] ; then cd /tmp && \
+    git clone git://github.com/xdebug/xdebug.git && \
+    cd xdebug && \
+    git checkout 52adff7539109db592d07d3f6c325f6ee2a7669f && \
+    phpize && \
+    ./configure --enable-xdebug && \
+    make && \
+    make install && \
+    rm -rf /tmp/xdebug \
+; fi
+
 # Environment settings
 ENV PHP_USER_ID=33 \
     PHP_ENABLE_XDEBUG=0 \
@@ -91,6 +104,10 @@ RUN composer global require --optimize-autoloader \
         "hirak/prestissimo:${VERSION_PRESTISSIMO_PLUGIN}" && \
     composer global dumpautoload --optimize && \
     composer clear-cache
+
+# Check if Apache rewite module need to be enabled
+ARG APACHE_ENABLE_REWRITE
+RUN if [ 0 -ne "${APACHE_ENABLE_REWRITE:-0}" ] ; then a2enmod rewrite ; fi
 
 # Application environment
 WORKDIR /app

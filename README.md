@@ -39,6 +39,7 @@ Adjust the versions in `.env` if you want to build a specific version.
 
 - `PHP_ENABLE_XDEBUG` whether to load an enable Xdebug, defaults to `0` (false)
 - `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`), see also [#15](https://github.com/yiisoft/yii2-docker/issues/15)
+- `APACHE_ENABLE_REWRITE` whether to load or enable apache2 mod_rewrite, defaults to `1` (true)
 
 
 ## Building
@@ -50,6 +51,16 @@ Adjust the versions in `.env` if you want to build a specific version.
 
     docker-compose run --rm php php /tests/requirements.php
 
+## Xdebug
+
+To enable Xdebug, set `PHP_ENABLE_XDEBUG=1` in .env file
+
+Xdebug is configured to call ip 10.254.254.254 on 9005 port (not use standard port to avoid conflicts),
+so you have to configure your IDE to receive connections from that ip.
+
+The port 9005 is enabled in docker-compose.apache.yml and to activate ip 10.254.254.254 locally, on MacOS the command is: 
+
+    ifconfig lo0 alias 10.254.254.254
 
 ## Documentation
 
@@ -59,4 +70,3 @@ More information can be found in the [docs](/docs) folder.
 ## FAQ
 
 - Error code `139` on Alpine for PHP `5.6-7.1` results from a broken ImageMagick installation         
-
