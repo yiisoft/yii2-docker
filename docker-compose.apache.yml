@@ -4,4 +4,3 @@ services:
   php:
     ports:
       - '8000:80'
-      - '9005:9005'     # comment it if you don't use Xdebug
