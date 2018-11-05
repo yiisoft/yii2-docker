@@ -65,17 +65,15 @@ RUN printf "\n" | pecl install \
         mongodb
 
 # Check if Xdebug extension need to be compiled
-ARG PHP_ENABLE_XDEBUG
-RUN if [ 0 -ne "${PHP_ENABLE_XDEBUG:-0}" ] ; then cd /tmp && \
+RUN cd /tmp && \
     git clone git://github.com/xdebug/xdebug.git && \
     cd xdebug && \
-    git checkout 52adff7539109db592d07d3f6c325f6ee2a7669f && \
+    git checkout 2.6.1 && \
     phpize && \
     ./configure --enable-xdebug && \
     make && \
     make install && \
-    rm -rf /tmp/xdebug \
-; fi
+    rm -rf /tmp/xdebug
 
 # Environment settings
 ENV PHP_USER_ID=33 \
