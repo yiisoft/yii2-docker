@@ -26,6 +26,7 @@ RUN apt-get update && \
             libpq-dev \
             libpng-dev \
             libxml2-dev \
+            libzip-dev \
             zlib1g-dev \
             mysql-client \
             openssh-client \
