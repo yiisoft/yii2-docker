@@ -16,7 +16,6 @@ RUN apt-get update && \
             git \
             curl \
             imagemagick \
-            libfreetype6-dev \
             libcurl3-dev \
             libicu-dev \
             libfreetype6-dev \
