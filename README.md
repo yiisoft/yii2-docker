@@ -69,4 +69,4 @@ More information can be found in the [docs](/docs) folder.
 
 ## FAQ
 
-- We do not officially support Alpine images due to numerous issues with PHP requirements and because framework tests are not passing.
+- We do not officially support Alpine images, due to numerous issues with PHP requirements and because framework tests are not passing.
