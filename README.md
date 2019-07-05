@@ -69,4 +69,4 @@ More information can be found in the [docs](/docs) folder.
 
 ## FAQ
 
-- Error code `139` on Alpine for PHP `5.6-7.1` results from a broken ImageMagick installation         
+- We do not officially support Alpine images due to numerous issues with PHP requirements and because framework tests are not passing.
