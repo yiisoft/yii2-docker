@@ -1,5 +1,7 @@
 ## Installing additional extensions
 
+*Note: Alpine images are not officially supported*
+
 ### Composer asset plugin
 
     RUN composer global require "fxp/composer-asset-plugin:^1.4.2"
