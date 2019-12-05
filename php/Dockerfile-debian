@@ -21,6 +21,7 @@ RUN apt-get update && \
             libfreetype6-dev \
             libjpeg-dev \
             libjpeg62-turbo-dev \
+            libonig-dev \
             libmagickwand-dev \
             libpq-dev \
             libpng-dev \
@@ -66,24 +67,25 @@ RUN printf "\n" | pecl install \
         imagick \
         mongodb
 
+# Environment settings
+ENV COMPOSER_ALLOW_SUPERUSER=1 \
+    PHP_USER_ID=33 \
+    PHP_ENABLE_XDEBUG=0 \
+    PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
+    TERM=linux \
+    VERSION_PRESTISSIMO_PLUGIN=^0.3.7 \
+    VERSION_XDEBUG=2.8.1
+
 # Check if Xdebug extension need to be compiled
 RUN cd /tmp && \
     git clone git://github.com/xdebug/xdebug.git && \
     cd xdebug && \
-    git checkout 2.7.2 && \
+    git checkout ${XDEBUG_VERSION} && \
     phpize && \
     ./configure --enable-xdebug && \
     make && \
     make install && \
     rm -rf /tmp/xdebug
-
-# Environment settings
-ENV PHP_USER_ID=33 \
-    PHP_ENABLE_XDEBUG=0 \
-    PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
-    TERM=linux \
-    VERSION_PRESTISSIMO_PLUGIN=^0.3.7 \
-    COMPOSER_ALLOW_SUPERUSER=1
 
 # Add configuration files
 COPY image-files/ /
