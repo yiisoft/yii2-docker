@@ -57,7 +57,7 @@ before_script:
 
 script:
   - echo "travis_fold:start:BUILD folding starts"
-  - docker-compose build
+  - docker-compose build --build-arg X_LEGACY_GD_LIB=$X_LEGACY_GD_LIB
   - echo "travis_fold:end:BUILD folding ends"
   - docker-compose run --rm php php -v
   - docker-compose run --rm php php /tests/requirements.php
