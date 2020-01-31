@@ -52,7 +52,7 @@ script:
   - echo "travis_fold:end:BUILD folding ends"
   - docker-compose run --rm php php -v
   - docker-compose run --rm php php /tests/requirements.php
-  - docker-compose run --rm -w /yii2 php composer install
+  - docker-compose run --rm -w /yii2 php composer install --prefer-dist
   - docker-compose run --rm -w /yii2 php php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
 
 after_script:
