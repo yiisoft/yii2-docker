@@ -25,7 +25,7 @@ matrix:
 
 before_install:
   - export TEST_YII_VERSION=a777c2e8f69dc753f8a945b1dd54bbaaa1e9e66c
-  - export DOCKER_COMPOSE_VERSION=1.16.1
+  - export DOCKER_COMPOSE_VERSION=1.25.4
   - export PHP_IMAGE_NAME=yiisoftware/yii2-php
   - if [ -n "$TRAVIS_TAG" ]; then export PHP_IMAGE_VERSION_SUFFIX=-${TRAVIS_TAG}; fi
   - sudo apt-get update
