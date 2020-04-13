@@ -56,7 +56,7 @@ script:
   - docker-compose run --rm -w /yii2 php php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
   - if [[ $TRAVIS_BRANCH = "master" || -n "$TRAVIS_TAG" ]]; then
     echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin  &&
-    docker-compose push;
+    travis_retry docker-compose push;
     fi
 
 after_script:
