@@ -6,7 +6,8 @@ services:
       dockerfile: Dockerfile-${DOCKERFILE_FLAVOUR}
       context: 'php'
       args:
-        - PHP_BASE_IMAGE_VERSION=${PHP_BASE_IMAGE_VERSION}
+        - PHP_BASE_IMAGE_VERSION
+        - X_LEGACY_GD_LIB
     image: ${PHP_IMAGE_NAME}:${PHP_BASE_IMAGE_VERSION}${PHP_IMAGE_VERSION_SUFFIX}
     environment:
       - GITHUB_API_TOKEN=${GITHUB_API_TOKEN}
