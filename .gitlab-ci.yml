@@ -11,9 +11,8 @@ variables:
 
 before_script:
   - env
-  - apk add --no-cache git curl
-  - curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
-  - chmod u+x /usr/bin/docker-compose
+  - apk add --no-cache git curl pip
+  - pip install docker-compose
   - git clone https://github.com/yiisoft/yii2 _host-volumes/yii2
   - git -C _host-volumes/yii2 checkout ${TEST_YII_VERSION}
   - cp .env-dist .env
