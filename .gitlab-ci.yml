@@ -10,6 +10,7 @@ variables:
   TEST_YII_VERSION: 2.0.15.1
 
 before_script:
+  - env
   - apk add --no-cache git curl
   - curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose
   - chmod u+x /usr/bin/docker-compose
