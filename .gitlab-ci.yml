@@ -11,7 +11,7 @@ variables:
 
 before_script:
   - env
-  - apk add --no-cache git curl pip
+  - apk add --no-cache git curl py-pip
   - pip install docker-compose
   - git clone https://github.com/yiisoft/yii2 _host-volumes/yii2
   - git -C _host-volumes/yii2 checkout ${TEST_YII_VERSION}
