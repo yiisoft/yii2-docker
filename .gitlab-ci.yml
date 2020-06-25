@@ -7,13 +7,13 @@ variables:
   DOCKERFILE_FLAVOUR: debian
   PHP_BASE_IMAGE_VERSION: fpm
   PHP_IMAGE_NAME: yiiframework/php
-  TEST_YII_VERSION: 2.0.15.1
+  TEST_YII_VERSION: 2.0.35
 
 before_script:
-  - apk add --no-cache python py2-pip git
-  - pip install --no-cache-dir docker-compose==1.16.0
+  - env
+  - apk add --no-cache git curl docker-compose
   - git clone https://github.com/yiisoft/yii2 _host-volumes/yii2
-  - pushd _host-volumes/yii2 && git checkout ${TEST_YII_VERSION} && popd
+  - git -C _host-volumes/yii2 checkout ${TEST_YII_VERSION}
   - cp .env-dist .env
   - docker info
 
