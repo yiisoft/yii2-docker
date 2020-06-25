@@ -7,7 +7,7 @@ variables:
   DOCKERFILE_FLAVOUR: debian
   PHP_BASE_IMAGE_VERSION: fpm
   PHP_IMAGE_NAME: yiiframework/php
-  TEST_YII_VERSION: 2.0.15.1
+  TEST_YII_VERSION: 2.0.35
 
 before_script:
   - env
