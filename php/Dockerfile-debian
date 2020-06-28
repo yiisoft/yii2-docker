@@ -69,10 +69,12 @@ RUN if [ $X_LEGACY_GD_LIB = 1 ]; then \
 # see http://stackoverflow.com/a/8154466/291573) for usage of `printf`
 RUN printf "\n" | pecl install \
         imagick \
-        mongodb && \
+        mongodb \
+        igbinary && \
     docker-php-ext-enable \
         imagick \
-        mongodb
+        mongodb \
+        igbinary
 
 # Environment settings
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
