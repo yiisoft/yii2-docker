@@ -83,3 +83,12 @@ Put the basic, devel and odbc rpm packages in a folder (oracle_instant_client in
         ln -s /usr/include/oracle/18.3/client64 $ORACLE_HOME/include && \
         docker-php-ext-install pdo oci8 pdo_oci && \
         rm -rf /opt/oracle
+
+
+### igbinary
+Add faster serialization with the [igbinary](https://github.com/igbinary/igbinary) library.
+
+#### Debian
+
+    RUN pecl install igbinary && \
+        docker-php-ext-enable igbinary
