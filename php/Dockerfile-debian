@@ -69,9 +69,11 @@ RUN if [ $X_LEGACY_GD_LIB = 1 ]; then \
 # see http://stackoverflow.com/a/8154466/291573) for usage of `printf`
 RUN printf "\n" | pecl install \
         imagick \
+        xdebug \
         mongodb && \
     docker-php-ext-enable \
         imagick \
+        xdebug \
         mongodb
 
 # Environment settings
@@ -80,19 +82,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1 \
     PHP_ENABLE_XDEBUG=0 \
     PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
     TERM=linux \
-    VERSION_PRESTISSIMO_PLUGIN=^0.3.7 \
-    VERSION_XDEBUG=2.8.1
-
-# Check if Xdebug extension need to be compiled
-RUN cd /tmp && \
-    git clone git://github.com/xdebug/xdebug.git && \
-    cd xdebug && \
-    git checkout ${XDEBUG_VERSION} && \
-    phpize && \
-    ./configure --enable-xdebug && \
-    make && \
-    make install && \
-    rm -rf /tmp/xdebug
+    VERSION_PRESTISSIMO_PLUGIN=^0.3.10
 
 # Add configuration files
 COPY image-files/ /
