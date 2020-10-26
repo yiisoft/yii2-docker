@@ -87,7 +87,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1 \
 COPY image-files/ /
 
 # Add GITHUB_API_TOKEN support for composer
-RUN chmod 700 \
+RUN chmod 755 \
         /usr/local/bin/docker-php-entrypoint \
         /usr/local/bin/composer
 
