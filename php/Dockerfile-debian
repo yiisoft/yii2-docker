@@ -67,9 +67,10 @@ RUN if [ $X_LEGACY_GD_LIB = 1 ]; then \
 
 # Install PECL extensions
 # see http://stackoverflow.com/a/8154466/291573) for usage of `printf`
+ARG PECL_XDEBUG_INSTALL_SUFFIX
 RUN printf "\n" | pecl install \
         imagick \
-        xdebug \
+        xdebug${PECL_XDEBUG_INSTALL_SUFFIX} \
         mongodb && \
     docker-php-ext-enable \
         imagick \
