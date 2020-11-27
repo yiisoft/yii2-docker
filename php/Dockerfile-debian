@@ -69,7 +69,7 @@ RUN if [ $X_LEGACY_GD_LIB = 1 ]; then \
 # see http://stackoverflow.com/a/8154466/291573) for usage of `printf`
 RUN printf "\n" | pecl install \
         imagick \
-        xdebug \
+        xdebug-2.9.8 \
         mongodb && \
     docker-php-ext-enable \
         imagick \
