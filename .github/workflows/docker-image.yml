@@ -1,0 +1,101 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+       include:
+         - php-base-image-version: 5.6-fpm
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: ""
+         - php-base-image-version: "7.0-fpm"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: "-2.7.2"
+         - php-base-image-version: "7.1-fpm"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: "-2.9.8"
+         - php-base-image-version: "7.2-fpm"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: ""
+         - php-base-image-version: "7.3-fpm"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: ""
+         - php-base-image-version: "7.4-fpm"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: ""
+           pecl-xdebug-suffix: ""
+         - php-base-image-version: "5.6-apache"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: ""
+         - php-base-image-version: "7.0-apache"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: "-2.7.2"
+         - php-base-image-version: "7.1-apache"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: "-2.9.8"
+         - php-base-image-version: "7.2-apache"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: ""
+         - php-base-image-version: "7.3-apache"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: "1"
+           pecl-xdebug-suffix: ""
+         - php-base-image-version: "7.4-apache"
+           dockerfile-flavour: "debian"
+           legacy-gd-lib: ""
+           pecl-xdebug-suffix: ""
+      fail-fast: false
+    env:
+      PHP_IMAGE_NAME: "yiisoftware/yii2-php"
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set version suffix
+      if: startsWith(github.ref, 'refs/tags/')
+      run: echo "PHP_IMAGE_VERSION_SUFFIX=${GITHUB_REF:10}" >> $GITHUB_ENV
+    - name: Install
+      env:
+        TEST_YII_VERSION: "a777c2e8f69dc753f8a945b1dd54bbaaa1e9e66c"
+      run: |
+        git clone https://github.com/yiisoft/yii2 _host-volumes/yii2
+        pushd _host-volumes/yii2 && git checkout ${TEST_YII_VERSION} && popd
+        cp .env-dist .env
+    - name: Print Info
+      run: |
+        pwd
+        docker version
+        docker info
+        docker-compose version
+    - name: Test
+      env:
+        PHP_BASE_IMAGE_VERSION: ${{ matrix.php-base-image-version }}
+        DOCKERFILE_FLAVOUR: ${{ matrix.dockerfile-flavour }}
+        X_LEGACY_GD_LIB: ${{ matrix.legacy-gd-lib }}
+        PECL_XDEBUG_INSTALL_SUFFIX: ${{ matrix.pecl-xdebug-suffix }}
+      run: |
+        echo "::group::Build output"
+        docker-compose build --build-arg X_LEGACY_GD_LIB=$X_LEGACY_GD_LIB
+        echo "::endgroup::"
+        docker-compose run --rm php php -v
+        docker-compose run --rm -e PHP_ENABLE_XDEBUG=1 php php -v
+        docker-compose run --rm php php /tests/requirements.php
+        docker-compose run --rm -w /yii2 php composer install --prefer-dist
+        docker-compose run --rm -w /yii2 php php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
+    - name: Build and Push
+      if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'
+      run: | 
+        echo ${{ secrets.DOCKERHUB_PASS }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
+        docker-compose push
