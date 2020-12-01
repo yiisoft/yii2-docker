@@ -94,8 +94,12 @@ jobs:
         docker-compose run --rm php php /tests/requirements.php
         docker-compose run --rm -w /yii2 php composer install --prefer-dist
         docker-compose run --rm -w /yii2 php php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
-    - name: Build and Push
+    - name: Login to Docker
       if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'
-      run: | 
-        echo ${{ secrets.DOCKERHUB_PASS }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
-        docker-compose push
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USER }}
+        password: ${{ secrets.DOCKERHUB_PASS }}
+    - name: Push docker image
+      if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'
+      run: docker-compose push
