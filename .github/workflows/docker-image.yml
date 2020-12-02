@@ -61,6 +61,10 @@ jobs:
       fail-fast: false
     env:
       PHP_IMAGE_NAME: "yiisoftware/yii2-php"
+      PHP_BASE_IMAGE_VERSION: ${{ matrix.php-base-image-version }}
+      DOCKERFILE_FLAVOUR: ${{ matrix.dockerfile-flavour }}
+      X_LEGACY_GD_LIB: ${{ matrix.legacy-gd-lib }}
+      PECL_XDEBUG_INSTALL_SUFFIX: ${{ matrix.pecl-xdebug-suffix }}
     steps:
     - uses: actions/checkout@v1
     - name: Set version suffix
@@ -80,11 +84,6 @@ jobs:
         docker info
         docker-compose version
     - name: Test
-      env:
-        PHP_BASE_IMAGE_VERSION: ${{ matrix.php-base-image-version }}
-        DOCKERFILE_FLAVOUR: ${{ matrix.dockerfile-flavour }}
-        X_LEGACY_GD_LIB: ${{ matrix.legacy-gd-lib }}
-        PECL_XDEBUG_INSTALL_SUFFIX: ${{ matrix.pecl-xdebug-suffix }}
       run: |
         echo "::group::Build output"
         docker-compose build --build-arg X_LEGACY_GD_LIB=$X_LEGACY_GD_LIB
@@ -94,6 +93,7 @@ jobs:
         docker-compose run --rm php php /tests/requirements.php
         docker-compose run --rm -w /yii2 php composer install --prefer-dist
         docker-compose run --rm -w /yii2 php php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
+        docker images
     - name: Login to Docker
       if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'
       uses: docker/login-action@v1
