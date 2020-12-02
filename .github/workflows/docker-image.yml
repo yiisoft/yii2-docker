@@ -94,11 +94,10 @@ jobs:
         docker version
         docker info
         docker-compose version
+    - name: Build Image
+      run: docker-compose build --build-arg X_LEGACY_GD_LIB=$X_LEGACY_GD_LIB
     - name: Test
       run: |
-        echo "::group::Build output"
-        docker-compose build --build-arg X_LEGACY_GD_LIB=$X_LEGACY_GD_LIB
-        echo "::endgroup::"
         docker-compose run --rm php php -v
         docker-compose run --rm -e PHP_ENABLE_XDEBUG=1 php php -v
         docker-compose run --rm php php /tests/requirements.php
