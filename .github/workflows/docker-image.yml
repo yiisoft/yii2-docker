@@ -13,15 +13,18 @@ jobs:
          - php-base-image-version: 5.6-fpm
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
-           pecl-xdebug-suffix: ""
+           pecl-xdebug-suffix: "-2.5.5"
+           pecl-mongodb-suffix: "-1.5.5"
          - php-base-image-version: "7.0-fpm"
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
            pecl-xdebug-suffix: "-2.7.2"
+           pecl-mongodb-suffix: ""
          - php-base-image-version: "7.1-fpm"
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
            pecl-xdebug-suffix: "-2.9.8"
+           pecl-mongodb-suffix: ""
          - php-base-image-version: "7.2-fpm"
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
@@ -30,6 +33,7 @@ jobs:
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
            pecl-xdebug-suffix: ""
+           pecl-mongodb-suffix: ""
          - php-base-image-version: "7.4-fpm"
            dockerfile-flavour: "debian"
            legacy-gd-lib: ""
@@ -37,27 +41,33 @@ jobs:
          - php-base-image-version: "5.6-apache"
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
-           pecl-xdebug-suffix: ""
+           pecl-xdebug-suffix: "-2.5.5"
+           pecl-mongodb-suffix: "-1.5.5"
          - php-base-image-version: "7.0-apache"
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
            pecl-xdebug-suffix: "-2.7.2"
+           pecl-mongodb-suffix: ""
          - php-base-image-version: "7.1-apache"
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
            pecl-xdebug-suffix: "-2.9.8"
+           pecl-mongodb-suffix: ""
          - php-base-image-version: "7.2-apache"
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
            pecl-xdebug-suffix: ""
+           pecl-mongodb-suffix: ""
          - php-base-image-version: "7.3-apache"
            dockerfile-flavour: "debian"
            legacy-gd-lib: "1"
            pecl-xdebug-suffix: ""
+           pecl-mongodb-suffix: ""
          - php-base-image-version: "7.4-apache"
            dockerfile-flavour: "debian"
            legacy-gd-lib: ""
            pecl-xdebug-suffix: ""
+           pecl-mongodb-suffix: ""
       fail-fast: false
     env:
       PHP_IMAGE_NAME: "yiisoftware/yii2-php"
@@ -65,6 +75,7 @@ jobs:
       DOCKERFILE_FLAVOUR: ${{ matrix.dockerfile-flavour }}
       X_LEGACY_GD_LIB: ${{ matrix.legacy-gd-lib }}
       PECL_XDEBUG_INSTALL_SUFFIX: ${{ matrix.pecl-xdebug-suffix }}
+      PECL_MONGODB_INSTALL_SUFFIX: ${{ matrix.pecl-mongodb-suffix }}
     steps:
     - uses: actions/checkout@v1
     - name: Set version suffix
