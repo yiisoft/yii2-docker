@@ -6,7 +6,7 @@ Enter the `php` container
     
 Open in your browser
 
-    http://127.0.0.1:8000
+    http://127.0.0.1:8101
     
 When running Apache you need a configuration like the following to use `enablePrettyUrl` in `.htaccess` in your public `web` folder
 
