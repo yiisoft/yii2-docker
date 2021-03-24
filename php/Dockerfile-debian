@@ -67,12 +67,15 @@ RUN if [ $X_LEGACY_GD_LIB = 1 ]; then \
 
 # Install PECL extensions
 # see http://stackoverflow.com/a/8154466/291573) for usage of `printf`
+# see https://github.com/Imagick/imagick/issues/331#issuecomment-779190777 for usage of `mkdir -p /usr/src/php/ext/imagick`
 ARG PECL_XDEBUG_INSTALL_SUFFIX
 ARG PECL_MONGODB_INSTALL_SUFFIX
 RUN printf "\n" | pecl install \
-        imagick \
         xdebug${PECL_XDEBUG_INSTALL_SUFFIX} \
         mongodb${PECL_MONGODB_INSTALL_SUFFIX} && \
+        mkdir -p /usr/src/php/ext/imagick; \
+        curl -fsSL https://github.com/Imagick/imagick/archive/06116aa24b76edaf6b1693198f79e6c295eda8a9.tar.gz | tar xvz -C "/usr/src/php/ext/imagick" --strip 1; \
+        docker-php-ext-install imagick; \
     docker-php-ext-enable \
         imagick \
         mongodb
@@ -95,16 +98,11 @@ RUN chmod 755 \
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- \
-        --version=1.10.16 \
+        --version=2.0.11 \
         --filename=composer.phar \
         --install-dir=/usr/local/bin && \
     composer clear-cache
 
-# Install composer plugins
-RUN composer global require --optimize-autoloader \
-        "hirak/prestissimo:${VERSION_PRESTISSIMO_PLUGIN}" && \
-    composer global dumpautoload --optimize && \
-    composer clear-cache
 
 # Enable mod_rewrite for images with apache
 RUN if command -v a2enmod >/dev/null 2>&1; then \
