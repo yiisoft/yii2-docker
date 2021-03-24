@@ -70,7 +70,7 @@ If you are using macOS, you can fill `xdebug.remote_host` with `host.docker.inte
 
     ### (macOS) configuration
     xdebug.remote_host=host.docker.internal
-
+ 
 ## Documentation
 
 More information can be found in the [docs](/docs) folder.
