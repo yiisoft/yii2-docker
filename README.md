@@ -80,4 +80,4 @@ More information can be found in the [docs](/docs) folder.
 
 - We do not officially support Alpine images, due to numerous issues with PHP requirements and because framework tests are not passing.
 - Depending on the (Debian) base-image (usually PHP <7.4) you might need to set `X_LEGACY_GD_LIB=1`
-- test 
+- test
