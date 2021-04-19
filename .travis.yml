@@ -28,7 +28,7 @@ matrix:
     - env: PHP_BASE_IMAGE_VERSION=7.2-apache DOCKERFILE_FLAVOUR=debian X_LEGACY_GD_LIB=1
 
 before_install:
-  - export TEST_YII_VERSION=a777c2e8f69dc753f8a945b1dd54bbaaa1e9e66c
+  - export TEST_YII_VERSION=5fbd28e05609bd31c8415ede663747c2133d1e46
   - export DOCKER_COMPOSE_VERSION=1.25.4
   - export PHP_IMAGE_NAME=yiisoftware/yii2-php
   - if [ -n "$TRAVIS_TAG" ]; then export PHP_IMAGE_VERSION_SUFFIX=-${TRAVIS_TAG}; fi
