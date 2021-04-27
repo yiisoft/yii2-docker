@@ -95,7 +95,7 @@ RUN chmod 755 \
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- \
-        --version=1.10.21 \
+        --version=1.10.22 \
         --filename=composer.phar \
         --install-dir=/usr/local/bin && \
     composer clear-cache
