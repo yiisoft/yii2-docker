@@ -18,13 +18,14 @@ The `Dockerfile`(s) of this repository are designed to build from different PHP-
 ### Available versions for `yiisoftware/yii2-php`
 
 ```
-7.4-apache, 7.3-apache
-7.4-fpm, 7.3-fpm
+8.0-apache, 8.0-fpm
+7.4-apache, 7.4-fpm 
 ```
 
 #### Deprecated or EOL versions
 
 ```
+7.3-apache, 7.3-fpm
 7.2-apache, 7.1-apache, 7.0-apache, 5.6-apache
 7.2-fpm, 7.1-fpm, 7.0-fpm, 5.6-fpm
 ```
@@ -75,3 +76,4 @@ More information can be found in the [docs](/docs) folder.
 
 - We do not officially support Alpine images, due to numerous issues with PHP requirements and because framework tests are not passing.
 - Depending on the (Debian) base-image (usually PHP <7.4) you might need to set `X_LEGACY_GD_LIB=1`
+- test
