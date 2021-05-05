@@ -5,53 +5,8 @@ ARG PHP_BASE_IMAGE_VERSION
 FROM php:${PHP_BASE_IMAGE_VERSION}
 
 # Install system packages for PHP extensions recommended for Yii 2.0 Framework
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && \
-    apt-get -y install \
-        gnupg2 && \
-    apt-key update && \
-    apt-get update && \
-    apt-get -y install \
-            g++ \
-            git \
-            curl \
-            imagemagick \
-            libcurl3-dev \
-            libicu-dev \
-            libfreetype6-dev \
-            libjpeg-dev \
-            libjpeg62-turbo-dev \
-            libonig-dev \
-            libmagickwand-dev \
-            libpq-dev \
-            libpng-dev \
-            libxml2-dev \
-            libzip-dev \
-            zlib1g-dev \
-            default-mysql-client \
-            openssh-client \
-            nano \
-            unzip \
-            libcurl4-openssl-dev \
-            libssl-dev \
-        --no-install-recommends && \
-        apt-get clean && \
-        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Install PHP extensions required for Yii 2.0 Framework
-ARG X_LEGACY_GD_LIB=0
-RUN if [ $X_LEGACY_GD_LIB = 1 ]; then \
-        docker-php-ext-configure gd \
-                --with-freetype-dir=/usr/include/ \
-                --with-png-dir=/usr/include/ \
-                --with-jpeg-dir=/usr/include/; \
-    else \
-        docker-php-ext-configure gd \
-                --with-freetype=/usr/include/ \
-                --with-jpeg=/usr/include/; \
-    fi && \
-    docker-php-ext-configure bcmath && \
-    docker-php-ext-install \
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions \
         soap \
         zip \
         curl \
@@ -63,22 +18,13 @@ RUN if [ $X_LEGACY_GD_LIB = 1 ]; then \
         mbstring \
         opcache \
         pdo_mysql \
-        pdo_pgsql
-
-# Install PECL extensions
-# see http://stackoverflow.com/a/8154466/291573) for usage of `printf`
-# see https://github.com/Imagick/imagick/issues/331#issuecomment-779190777 for usage of `mkdir -p /usr/src/php/ext/imagick`
-ARG PECL_XDEBUG_INSTALL_SUFFIX
-ARG PECL_MONGODB_INSTALL_SUFFIX
-RUN printf "\n" | pecl install \
-        xdebug${PECL_XDEBUG_INSTALL_SUFFIX} \
-        mongodb${PECL_MONGODB_INSTALL_SUFFIX} && \
-        mkdir -p /usr/src/php/ext/imagick; \
-        curl -fsSL https://github.com/Imagick/imagick/archive/06116aa24b76edaf6b1693198f79e6c295eda8a9.tar.gz | tar xvz -C "/usr/src/php/ext/imagick" --strip 1; \
-        docker-php-ext-install imagick; \
-    docker-php-ext-enable \
+        pdo_pgsql \
         imagick \
-        mongodb
+        mongodb \
+        xdebug
+
+# Disable xdebug by default (see PHP_ENABLE_XDEBUG)
+RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Environment settings
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
@@ -110,8 +56,9 @@ RUN if command -v a2enmod >/dev/null 2>&1; then \
     ;fi
 
 # Install Yii framework bash autocompletion
-RUN curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii \
-        -o /etc/bash_completion.d/yii
+RUN mkdir /etc/bash_completion.d && \
+    curl -L https://raw.githubusercontent.com/yiisoft/yii2/master/contrib/completion/bash/yii \
+         -o /etc/bash_completion.d/yii
 
 # Application environment
 WORKDIR /app
