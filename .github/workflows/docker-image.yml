@@ -107,8 +107,8 @@ jobs:
       run: docker-compose build --build-arg X_LEGACY_GD_LIB=$X_LEGACY_GD_LIB
     - name: Test
       run: |
-        docker-compose run --rm php php -v
-        docker-compose run --rm -e PHP_ENABLE_XDEBUG=1 php php -v
+        docker-compose run --rm php php -v | grep "Xdebug" && exit 1
+        docker-compose run --rm -e PHP_ENABLE_XDEBUG=1 php php -v | grep "Xdebug" || exit 1
         docker-compose run --rm php php /tests/requirements.php
         docker-compose run --rm -w /yii2 php composer install --prefer-dist
         docker-compose run --rm -w /yii2 php php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
