@@ -31,8 +31,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1 \
     PHP_USER_ID=33 \
     PHP_ENABLE_XDEBUG=0 \
     PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
-    TERM=linux \
-    VERSION_PRESTISSIMO_PLUGIN=^0.3.10
+    TERM=linux
 
 # Add configuration files
 COPY image-files/ /
