@@ -43,7 +43,6 @@ RUN chmod 755 \
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- \
-        --version=2.1.3 \
         --filename=composer.phar \
         --install-dir=/usr/local/bin && \
     composer clear-cache
