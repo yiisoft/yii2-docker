@@ -92,3 +92,17 @@ Add faster serialization with the [igbinary](https://github.com/igbinary/igbinar
 
     RUN pecl install igbinary && \
         docker-php-ext-enable igbinary
+
+
+### MsSQL
+
+    RUN apt-get update \
+        && apt-get install -y gnupg2
+    RUN curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+    RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+    RUN apt-get update \
+        && apt-get install -y \
+          msodbcsql17 \
+          unixodbc-dev
+    RUN pecl install sqlsrv pdo_sqlsrv \
+        && docker-php-ext-enable sqlsrv pdo_sqlsrv
