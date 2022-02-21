@@ -17,6 +17,15 @@ The `Dockerfile`(s) of this repository are designed to build from different PHP-
 
 ### Available versions for `yiisoftware/yii2-php`
 
+Minimal images
+
+```
+8.0-apache-min, 8.0-fpm-min
+7.4-apache-min, 7.4-fpm-min 
+```
+
+Development images
+
 ```
 8.0-apache, 8.0-fpm
 7.4-apache, 7.4-fpm 
