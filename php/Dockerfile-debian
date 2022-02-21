@@ -19,8 +19,8 @@ COPY image-files/base/ /
 
 
 RUN chmod 755 \
-        /usr/local/bin/docker-php-base-entrypoint
-ENTRYPOINT ["/usr/local/bin/docker-php-base-entrypoint"]
+        /usr/local/bin/docker-php-min-entrypoint
+ENTRYPOINT ["/usr/local/bin/docker-php-min-entrypoint"]
 
 # Enable mod_rewrite for images with apache
 RUN if command -v a2enmod >/dev/null 2>&1; then \
