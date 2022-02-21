@@ -111,11 +111,11 @@ jobs:
       run: docker-compose build --build-arg X_LEGACY_GD_LIB=$X_LEGACY_GD_LIB
     - name: Test
       run: |
-        docker-compose run --rm php php -v | grep "Xdebug" && exit 1
-        docker-compose run --rm -e PHP_ENABLE_XDEBUG=1 php php -v | grep "Xdebug" || exit 1
-        docker-compose run --rm php php /tests/requirements.php
-        docker-compose run --rm -w /yii2 php composer install --prefer-dist
-        docker-compose run --rm -w /yii2 php php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
+        docker-compose run --rm php-base php -v | grep "Xdebug" && exit 1
+        docker-compose run --rm php-base php /tests/requirements.php
+        docker-compose run --rm -w /yii2 php-base php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
+        docker-compose run --rm -w /yii2 php-dev composer install --prefer-dist
+        docker-compose run --rm -e PHP_ENABLE_XDEBUG=1 php-dev php -v | grep "Xdebug" || exit 1
         docker images
     - name: Login to Docker
       if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'

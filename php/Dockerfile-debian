@@ -2,51 +2,25 @@
 # ==============================================
 
 ARG PHP_BASE_IMAGE_VERSION
-FROM php:${PHP_BASE_IMAGE_VERSION}
+FROM php:${PHP_BASE_IMAGE_VERSION} as base
 
 # Install system packages for PHP extensions recommended for Yii 2.0 Framework
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions \
-        soap \
-        zip \
-        curl \
-        bcmath \
-        exif \
-        gd \
-        iconv \
-        intl \
-        mbstring \
-        opcache \
-        pdo_mysql \
-        pdo_pgsql \
-        imagick \
-        mongodb \
-        xdebug
-
-# Disable xdebug by default (see PHP_ENABLE_XDEBUG)
-RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+        intl
 
 # Environment settings
-ENV COMPOSER_ALLOW_SUPERUSER=1 \
-    PHP_USER_ID=33 \
-    PHP_ENABLE_XDEBUG=0 \
+ENV PHP_USER_ID=33 \
     PATH=/app:/app/vendor/bin:/root/.composer/vendor/bin:$PATH \
     TERM=linux
 
 # Add configuration files
-COPY image-files/ /
+COPY image-files/base/ /
 
-# Add GITHUB_API_TOKEN support for composer
+
 RUN chmod 755 \
-        /usr/local/bin/docker-php-entrypoint \
-        /usr/local/bin/composer
-
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- \
-        --filename=composer.phar \
-        --install-dir=/usr/local/bin && \
-    composer clear-cache
-
+        /usr/local/bin/docker-php-base-entrypoint
+ENTRYPOINT ["/usr/local/bin/docker-php-base-entrypoint"]
 
 # Enable mod_rewrite for images with apache
 RUN if command -v a2enmod >/dev/null 2>&1; then \
@@ -60,3 +34,44 @@ RUN mkdir /etc/bash_completion.d && \
 
 # Application environment
 WORKDIR /app
+
+
+
+FROM base as dev
+
+# Install system packages for PHP extensions recommended for Yii 2.0 Framework
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions \
+        soap \
+        zip \
+        bcmath \
+        exif \
+        gd \
+        opcache \
+        pdo_mysql \
+        pdo_pgsql \
+        imagick \
+        mongodb \
+        xdebug
+
+# Add configuration files
+COPY image-files/dev/ /
+
+# Disable xdebug by default (see PHP_ENABLE_XDEBUG)
+RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# Add GITHUB_API_TOKEN support for composer
+RUN chmod 755 \
+        /usr/local/bin/docker-php-dev-entrypoint \
+        /usr/local/bin/composer
+ENTRYPOINT ["/usr/local/bin/docker-php-dev-entrypoint"]
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- \
+        --filename=composer.phar \
+        --install-dir=/usr/local/bin && \
+    composer clear-cache
+
+# Environment settings
+ENV COMPOSER_ALLOW_SUPERUSER=1 \
+    PHP_ENABLE_XDEBUG=0
