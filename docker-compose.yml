@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: Dockerfile-${DOCKERFILE_FLAVOUR}
       context: 'php'
-      target: base
+      target: min
       args:
         - PHP_BASE_IMAGE_VERSION
         - X_LEGACY_GD_LIB
