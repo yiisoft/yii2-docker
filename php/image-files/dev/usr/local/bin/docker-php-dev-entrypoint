@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 # Enable xdebug by ENV variable
@@ -7,4 +7,4 @@ if [ 0 -ne "${PHP_ENABLE_XDEBUG:-0}" ] ; then
     echo "Enabled xdebug"
 fi
 
-source docker-php-min-entrypoint
+source /usr/local/bin/docker-php-min-entrypoint
