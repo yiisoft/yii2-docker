@@ -24,5 +24,5 @@ build:
     - docker-compose build
     - docker-compose run --rm php-min php -v
     - docker-compose run --rm php-min php /tests/requirements.php
-    - docker-compose run --rm -w /yii2 php-min php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
     - docker-compose run --rm -w /yii2 php-dev composer install
+    - docker-compose run --rm -w /yii2 php-dev php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
