@@ -113,6 +113,7 @@ jobs:
       run: |
         docker-compose run --rm php-min php -v | grep "Xdebug" && exit 1
         docker-compose run --rm php-min php /tests/requirements.php
+        docker-compose run --rm php-dev php /tests/requirements.php
         docker-compose run --rm -w /yii2 php-dev composer install --prefer-dist
         docker-compose run --rm -w /yii2 php-dev php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
         docker-compose run --rm -e PHP_ENABLE_XDEBUG=1 php-dev php -v | grep "Xdebug" || exit 1

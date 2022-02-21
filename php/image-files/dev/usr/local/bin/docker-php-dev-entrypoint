@@ -7,4 +7,4 @@ if [ 0 -ne "${PHP_ENABLE_XDEBUG:-0}" ] ; then
     echo "Enabled xdebug"
 fi
 
-source docker-php-base-entrypoint
+source docker-php-min-entrypoint
