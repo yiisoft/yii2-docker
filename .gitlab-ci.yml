@@ -7,7 +7,7 @@ variables:
   DOCKERFILE_FLAVOUR: debian
   PHP_BASE_IMAGE_VERSION: fpm
   PHP_IMAGE_NAME: yiiframework/php
-  TEST_YII_VERSION: 2.0.35
+  TEST_YII_VERSION: 2.0.45
 
 before_script:
   - env
@@ -24,5 +24,6 @@ build:
     - docker-compose build
     - docker-compose run --rm php-min php -v
     - docker-compose run --rm php-min php /tests/requirements.php
+    - docker-compose run --rm php-dev php /tests/requirements.php
     - docker-compose run --rm -w /yii2 php-dev composer install
     - docker-compose run --rm -w /yii2 php-dev php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
