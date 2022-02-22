@@ -24,6 +24,10 @@ services:
       - ./_host-volumes/app:/app:delegated
       # Composer cache
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
+    networks:
+      default:
+        aliases:
+          - php
 
   php-dev:
     build:

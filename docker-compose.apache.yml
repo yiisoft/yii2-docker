@@ -4,3 +4,7 @@ services:
   php-min:
     ports:
       - '8101:80'
+
+  php-dev:
+    ports:
+      - '8102:80'

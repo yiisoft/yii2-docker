@@ -15,12 +15,7 @@ ENV PHP_USER_ID=33 \
     TERM=linux
 
 # Add configuration files
-COPY image-files/base/ /
-
-
-RUN chmod 755 \
-        /usr/local/bin/docker-php-min-entrypoint
-ENTRYPOINT ["/usr/local/bin/docker-php-min-entrypoint"]
+COPY image-files/min/ /
 
 # Enable mod_rewrite for images with apache
 RUN if command -v a2enmod >/dev/null 2>&1; then \
@@ -35,7 +30,10 @@ RUN mkdir /etc/bash_completion.d && \
 # Application environment
 WORKDIR /app
 
+RUN chmod 755 \
+        /usr/local/bin/docker-php-entrypoint
 
+# ---------------------------------------------------------------------------------------------------------------------
 
 FROM min as dev
 
@@ -62,9 +60,8 @@ RUN rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Add GITHUB_API_TOKEN support for composer
 RUN chmod 755 \
-        /usr/local/bin/docker-php-dev-entrypoint \
+        /usr/local/bin/docker-php-entrypoint \
         /usr/local/bin/composer
-ENTRYPOINT ["/usr/local/bin/docker-php-dev-entrypoint"]
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- \
