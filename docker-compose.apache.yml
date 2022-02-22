@@ -1,6 +1,6 @@
 version: '2.2'
 services:
 
-  php:
+  php-min:
     ports:
       - '8101:80'
