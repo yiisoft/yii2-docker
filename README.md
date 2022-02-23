@@ -20,6 +20,7 @@ The `Dockerfile`(s) of this repository are designed to build from different PHP-
 Minimal images
 
 ```
+8.1-apache-min, 8.1-fpm-min
 8.0-apache-min, 8.0-fpm-min
 7.4-apache-min, 7.4-fpm-min 
 ```
@@ -27,6 +28,7 @@ Minimal images
 Development images
 
 ```
+8.1-apache, 8.1-fpm
 8.0-apache, 8.0-fpm
 7.4-apache, 7.4-fpm 
 ```
