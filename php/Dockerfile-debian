@@ -4,7 +4,7 @@
 ARG PHP_BASE_IMAGE_VERSION
 FROM php:${PHP_BASE_IMAGE_VERSION} as min
 
-# Install required system packages for PHP extensions recommended for Yii 2.0 Framework
+# Install required system packages for PHP extensions for Yii 2.0 Framework
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions \
         intl
@@ -33,7 +33,6 @@ WORKDIR /app
 RUN chmod 755 \
         /usr/local/bin/docker-php-entrypoint
 
-# ---------------------------------------------------------------------------------------------------------------------
 
 FROM min as dev
 
