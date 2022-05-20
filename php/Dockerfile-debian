@@ -36,6 +36,14 @@ RUN chmod 755 \
 
 FROM min as dev
 
+# Install system packages
+RUN apt-get update && \
+    apt-get -y install \
+            unzip \
+        --no-install-recommends && \
+        apt-get clean && \
+        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 # Install common system packages for PHP extensions recommended for Yii 2.0 Framework
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions \
