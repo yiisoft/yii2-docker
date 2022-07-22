@@ -47,16 +47,16 @@ RUN apt-get update && \
 # Install common system packages for PHP extensions recommended for Yii 2.0 Framework
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions \
-        soap-stable \
-        zip-stable \
-        bcmath-stable \
-        exif-stable \
-        gd-stable \
-        opcache-stable \
-        pdo_mysql-stable \
-        pdo_pgsql-stable \
-        imagick-stable \
-        mongodb-stable \
+        soap \
+        zip \
+        bcmath \
+        exif \
+        gd \
+        opcache \
+        pdo_mysql \
+        pdo_pgsql \
+        imagick \
+        mongodb \
         xdebug-stable
 
 # Add configuration files
