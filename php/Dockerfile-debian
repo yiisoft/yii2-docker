@@ -35,6 +35,8 @@ RUN chmod 755 \
 
 
 FROM min as dev
+ARG PECL_MONGODB_INSTALL_SUFFIX
+ARG PECL_XDEBUG_INSTALL_SUFFIX
 
 # Install system packages
 RUN apt-get update && \
@@ -56,8 +58,8 @@ RUN install-php-extensions \
         pdo_mysql \
         pdo_pgsql \
         imagick \
-        mongodb \
-        xdebug-stable
+        mongodb${PECL_MONGODB_INSTALL_SUFFIX} \
+        xdebug${PECL_XDEBUG_INSTALL_SUFFIX}
 
 # Add configuration files
 COPY image-files/dev/ /
