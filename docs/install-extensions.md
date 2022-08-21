@@ -23,7 +23,7 @@ RUN apt-get update && \
 
 *TBD*
 
-    RUN pecl install apc
+    RUN pecl install apcu
     RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/pecl-apcu.ini
 
 ---
