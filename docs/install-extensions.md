@@ -26,6 +26,12 @@ RUN apt-get update && \
     RUN pecl install apc
     RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/pecl-apcu.ini
 
+### APC (>= PHP 7)
+
+    RUN pecl install apcu_bc
+    RUN echo "extension=apcu.so" > /usr/local/etc/php/conf.d/docker-php-ext-apc1.ini
+    RUN echo "extension=apc.so" > /usr/local/etc/php/conf.d/docker-php-ext-apc2.ini
+
 ---
 
     RUN docker-php-ext-enable \
