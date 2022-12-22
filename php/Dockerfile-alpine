@@ -44,7 +44,6 @@ RUN  apk add --no-cache \
             unzip
 
 # Install common system packages for PHP extensions recommended for Yii 2.0 Framework
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions \
         soap \
         zip \
@@ -70,10 +69,10 @@ RUN chmod 755 \
         /usr/local/bin/composer
 
 # Install composer
-#RUN curl -sS https://getcomposer.org/installer | php -- \
-#        --filename=composer.phar \
-#        --install-dir=/usr/local/bin && \
-#    composer clear-cache
+RUN curl -sS https://getcomposer.org/installer | php -- \
+        --filename=composer.phar \
+        --install-dir=/usr/local/bin && \
+    composer clear-cache
 
 # Environment settings
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
