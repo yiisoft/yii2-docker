@@ -114,7 +114,7 @@ jobs:
       run: echo "PHP_IMAGE_VERSION_SUFFIX=-${GITHUB_REF:10}" >> $GITHUB_ENV
     - name: Install
       env:
-        TEST_YII_VERSION: "857f049e2e8967d11023f5958524acca54c195fe"
+        TEST_YII_VERSION: "8f7fb576cb979648b372c822919b4b8ef00824d9"
       run: |
         git clone https://github.com/yiisoft/yii2 _host-volumes/yii2
         pushd _host-volumes/yii2 && git checkout ${TEST_YII_VERSION} && popd
