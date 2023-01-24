@@ -41,6 +41,7 @@ ARG PECL_XDEBUG_INSTALL_SUFFIX
 # Install system packages
 RUN apt-get update && \
     apt-get -y install \
+            git \
             unzip \
         --no-install-recommends && \
         apt-get clean && \
