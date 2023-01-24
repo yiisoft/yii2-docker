@@ -2,7 +2,8 @@
 set -e
 
 # Set permissions based on ENV variable (debian only)
-if [ -x "$(command -v usermod)" ] ; then
+if [ -x "$(command -v usermod)" ] && [ $PHP_USER_ID -ne "0" ] ; then
+    echo "Switching uid for 'www-data' to $PHP_USER_ID"
     usermod -u ${PHP_USER_ID} www-data
 fi
 
