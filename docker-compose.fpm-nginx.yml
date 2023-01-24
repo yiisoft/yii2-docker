@@ -1,11 +1,23 @@
-version: '2.2'
+version: '2'
 services:
-  web:
-    image: phundament/nginx-one:1.9-5.1.1
-    environment:
-      - FASTCGI_PASS_HOST=php
+
+  php-nginx-min:
+    extends:
+      file: docker-compose.yml
+      service: php-min
+    build:
+      target: nginx-min
+    image: ${PHP_IMAGE_NAME}:${PHP_BASE_IMAGE_VERSION}${PHP_IMAGE_VERSION_SUFFIX}-nginx-min
     ports:
-      - '8100:80'
-    volumes:
-      # Application testing
-      - ./_host-volumes/app/web:/app/web:delegated
+      - '8201:80'
+
+  php-nginx-dev:
+    extends:
+      file: docker-compose.yml
+      service: php-min
+    build:
+      target: nginx-dev
+    image: ${PHP_IMAGE_NAME}:${PHP_BASE_IMAGE_VERSION}${PHP_IMAGE_VERSION_SUFFIX}-nginx
+    ports:
+      - '8202:80'
+

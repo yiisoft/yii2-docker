@@ -17,19 +17,19 @@ The `Dockerfile`(s) of this repository are designed to build from different PHP-
 Minimal images
 
 ```
-8.2-apache-min, 8.2-fpm-min
-8.1-apache-min, 8.1-fpm-min
-8.0-apache-min, 8.0-fpm-min
-7.4-apache-min, 7.4-fpm-min 
+8.2-apache-min, 8.2-fpm-min, 8.2-fpm-nginx-min
+8.1-apache-min, 8.1-fpm-min, 8.1-fpm-nginx-min
+8.0-apache-min, 8.0-fpm-min, 8.0-fpm-nginx-min
+7.4-apache-min, 7.4-fpm-min, 7.4-fpm-nginx-min 
 ```
 
 Development images
 
 ```
-8.2-apache, 8.2-fpm
-8.1-apache, 8.1-fpm
-8.0-apache, 8.0-fpm
-7.4-apache, 7.4-fpm 
+8.2-apache, 8.2-fpm, 8.2-fpm-nginx
+8.1-apache, 8.1-fpm, 8.1-fpm-nginx
+8.0-apache, 8.0-fpm, 8.0-fpm-nginx
+7.4-apache, 7.4-fpm, 7.4-fpm-nginx 
 ```
 
 #### Deprecated or EOL versions
