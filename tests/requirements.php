@@ -129,6 +129,13 @@ $requirements = array(
         'by' => 'Email sending',
         'memo' => 'PHP mail SMTP server required',
     ),
+    'phpPcntl' => array(
+        'name' => 'PHP Process Control',
+        'mandatory' => false,
+        'condition' => extension_loaded('pcntl'),
+        'by' => 'Queue',
+        'memo' => '',
+    ),
 );
 
 // OPcache check

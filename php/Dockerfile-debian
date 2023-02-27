@@ -50,6 +50,7 @@ RUN apt-get update && \
 # Install common system packages for PHP extensions recommended for Yii 2.0 Framework
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions \
+        pcntl \
         soap \
         zip \
         bcmath \
