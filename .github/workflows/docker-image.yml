@@ -118,7 +118,14 @@ jobs:
       PECL_XDEBUG_INSTALL_SUFFIX: ${{ matrix.pecl-xdebug-suffix }}
       PECL_MONGODB_INSTALL_SUFFIX: ${{ matrix.pecl-mongodb-suffix }}
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+      with:
+        platforms: 'amd64,arm64'
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
     - name: Set version suffix
       if: startsWith(github.ref, 'refs/tags/')
       run: echo "PHP_IMAGE_VERSION_SUFFIX=-${GITHUB_REF:10}" >> $GITHUB_ENV
@@ -136,7 +143,13 @@ jobs:
         docker info
         docker-compose version
     - name: Build Image
-      run: docker-compose build --build-arg X_LEGACY_GD_LIB=$X_LEGACY_GD_LIB
+      uses: docker/bake-action@v2
+      with:
+        files: docker-compose.yml
+        load: true
+        set: |
+          *.platform=linux/amd64
+          *.args.X_LEGACY_GD_LIB=${{ matrix.legacy-gd-lib }}
     - name: Test
       run: |
         docker-compose run --rm php-min php -v | grep "Xdebug" && exit 1
@@ -148,10 +161,15 @@ jobs:
         docker images
     - name: Login to Docker
       if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'
-      uses: docker/login-action@v1
+      uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_PASS }}
-    - name: Push docker image
+    - name: Build and push
       if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'
-      run: docker-compose push
+      uses: docker/bake-action@v2
+      with:
+        files: docker-compose.yml
+        push: true
+        set: |
+          *.platform=linux/amd64,linux/arm64
