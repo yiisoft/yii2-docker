@@ -1,4 +1,8 @@
 version: '2.2'
+
+networks:
+  default:
+
 services:
 
   php-min:
