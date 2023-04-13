@@ -183,4 +183,4 @@ jobs:
         files: docker-compose.yml
         push: true
         set: |
-          *.platform=linux/arm64
+          *.platform=linux/amd64,linux/arm64
