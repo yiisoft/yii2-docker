@@ -127,9 +127,12 @@ jobs:
         platforms: 'amd64,arm64'
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
-    - name: Set version suffix
+    - name: Set version suffix (tags)
       if: startsWith(github.ref, 'refs/tags/')
       run: echo "PHP_IMAGE_VERSION_SUFFIX=-${GITHUB_REF:10}" >> $GITHUB_ENV
+    - name: Set version suffix (master/latest)
+      if: (github.ref == 'refs/heads/master' && (github.event_name != 'workflow_dispatch' && github.event_name != 'schedule'))
+      run: echo "PHP_IMAGE_VERSION_SUFFIX=-latest" >> $GITHUB_ENV
     - name: Install
       env:
         TEST_YII_VERSION: "7c0788537520389269597c41dacf7bbf6ede738a"
@@ -166,18 +169,18 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_PASS }}
-    - name: Build and push
-      if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'
+    - name: Build and push docker image (amd64 master/latest)
+      if: (github.ref == 'refs/heads/master' && (github.event_name != 'workflow_dispatch' && github.event_name != 'schedule'))
       uses: docker/bake-action@v2
       with:
         files: docker-compose.yml
         push: true
         set: |
           *.platform=linux/amd64
-    - name: Build and push docker image (arm64)
+    - name: Build and push docker image (amd64,arm64)
       if: |
-        (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master') &&
-        (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule')
+          startsWith(github.ref, 'refs/tags/') ||
+          (github.ref == 'refs/heads/master' && (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'))
       uses: docker/bake-action@v2
       with:
         files: docker-compose.yml
