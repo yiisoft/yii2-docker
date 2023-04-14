@@ -14,6 +14,8 @@ The `Dockerfile`(s) of this repository are designed to build from different PHP-
 
 ### Available versions for `yiisoftware/yii2-php`
 
+The following images are built on a *weekly* basis for **arm64** and **amd64**. For regular commits on **master** we only build images for **amd64** suffixed with `-latest`/`-latest-min`.
+
 Minimal images
 
 ```
