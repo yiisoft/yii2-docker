@@ -37,11 +37,11 @@ RUN apt-get update && \
     RUN docker-php-ext-enable \
         imagick
 
-### memcache
+### memcached
 
 #### Debian (PHP 7)     
      
-    # memcache
+    # memcached
     ENV MEMCACHED_DEPS libmemcached-dev git
     RUN set -xe \
      && apt-get update \
