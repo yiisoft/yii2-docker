@@ -1,0 +1,10 @@
+version: '2.2'
+services:
+
+  php-min:
+    ports:
+      - '8301:80'
+
+  php-dev:
+    ports:
+      - '8302:80'
