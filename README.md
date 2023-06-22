@@ -22,7 +22,6 @@ Minimal images
 8.2-apache-min, 8.2-fpm-min, 8.2-fpm-nginx-min
 8.1-apache-min, 8.1-fpm-min, 8.1-fpm-nginx-min
 8.0-apache-min, 8.0-fpm-min, 8.0-fpm-nginx-min
-7.4-apache-min, 7.4-fpm-min, 7.4-fpm-nginx-min 
 ```
 
 Development images
@@ -31,15 +30,17 @@ Development images
 8.2-apache, 8.2-fpm, 8.2-fpm-nginx
 8.1-apache, 8.1-fpm, 8.1-fpm-nginx
 8.0-apache, 8.0-fpm, 8.0-fpm-nginx
-7.4-apache, 7.4-fpm, 7.4-fpm-nginx 
 ```
 
 #### Deprecated or EOL versions
 
 ```
-7.3-apache, 7.3-fpm
-7.2-apache, 7.1-apache, 7.0-apache, 5.6-apache
-7.2-fpm, 7.1-fpm, 7.0-fpm, 5.6-fpm
+7.4-*
+7.3-*
+7.2-*
+7.1-*
+7.0-*
+5.6-*
 ```
 
 ## Setup
