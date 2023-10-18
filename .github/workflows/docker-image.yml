@@ -19,17 +19,17 @@ jobs:
            dockerfile-flavour: "debian"
            legacy-gd-lib: ""
            pecl-xdebug-suffix: ""
-           compose-file: "docker-compose.yml:docker-compose.fpm-nginx.yml"
+           compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
          - php-base-image-version: "8.1-fpm"
            dockerfile-flavour: "debian"
            legacy-gd-lib: ""
            pecl-xdebug-suffix: ""
-           compose-file: "docker-compose.yml:docker-compose.fpm-nginx.yml"
+           compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
          - php-base-image-version: "8.2-fpm"
            dockerfile-flavour: "debian"
            legacy-gd-lib: ""
            pecl-xdebug-suffix: ""
-           compose-file: "docker-compose.yml:docker-compose.fpm-nginx.yml"
+           compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
          - php-base-image-version: "8.0-apache"
            dockerfile-flavour: "debian"
            legacy-gd-lib: ""
@@ -48,6 +48,7 @@ jobs:
       fail-fast: false
     env:
       COMPOSE_FILE: ${{ matrix.compose-file }}
+      COMPOSE_PATH_SEPARATOR: ","
       PHP_IMAGE_NAME: "yiisoftware/yii2-php"
       PHP_BASE_IMAGE_VERSION: ${{ matrix.php-base-image-version }}
       DOCKERFILE_FLAVOUR: ${{ matrix.dockerfile-flavour }}
