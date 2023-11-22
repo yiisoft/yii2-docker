@@ -94,7 +94,7 @@ jobs:
     - name: Build Image
       uses: docker/bake-action@v2
       with:
-        files: docker-compose.yml
+        files: ${{ matrix.compose-file }}
         load: true
         set: |
           *.platform=linux/amd64
@@ -118,7 +118,7 @@ jobs:
       if: (github.ref == 'refs/heads/master' && (github.event_name != 'workflow_dispatch' && github.event_name != 'schedule'))
       uses: docker/bake-action@v2
       with:
-        files: docker-compose.yml
+        files: ${{ matrix.compose-file }}
         push: true
         set: |
           *.platform=linux/amd64
@@ -128,7 +128,7 @@ jobs:
           (github.ref == 'refs/heads/master' && (github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'))
       uses: docker/bake-action@v2
       with:
-        files: docker-compose.yml
+        files: ${{ matrix.compose-file }}
         push: true
         set: |
           *.platform=linux/amd64,linux/arm64
