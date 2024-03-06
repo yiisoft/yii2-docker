@@ -19,6 +19,7 @@ The following images are built on a *weekly* basis for **arm64** and **amd64**. 
 Minimal images
 
 ```
+8.3-apache-min, 8.3-fpm-min, 8.3-fpm-nginx-min
 8.2-apache-min, 8.2-fpm-min, 8.2-fpm-nginx-min
 8.1-apache-min, 8.1-fpm-min, 8.1-fpm-nginx-min
 8.0-apache-min, 8.0-fpm-min, 8.0-fpm-nginx-min
@@ -27,6 +28,7 @@ Minimal images
 Development images
 
 ```
+8.3-apache, 8.3-fpm, 8.3-fpm-nginx
 8.2-apache, 8.2-fpm, 8.2-fpm-nginx
 8.1-apache, 8.1-fpm, 8.1-fpm-nginx
 8.0-apache, 8.0-fpm, 8.0-fpm-nginx
