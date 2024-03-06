@@ -40,6 +40,7 @@ jobs:
            dockerfile-flavour: "debian"
            compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
            pecl-xdebug-suffix: "-beta"
+           pecl-imagick-suffix: "/imagick@master"
            experimental: true
          - php-base-image-version: "8.0-apache"
            dockerfile-flavour: "debian"
@@ -53,6 +54,7 @@ jobs:
          - php-base-image-version: "8.3-apache"
            dockerfile-flavour: "debian"
            pecl-xdebug-suffix: "-beta"
+           pecl-imagick-suffix: "/imagick@master"
            experimental: true
       fail-fast: false
     env:
@@ -64,6 +66,7 @@ jobs:
       X_LEGACY_GD_LIB: ${{ matrix.legacy-gd-lib }}
       PECL_XDEBUG_INSTALL_SUFFIX: ${{ matrix.pecl-xdebug-suffix }}
       PECL_MONGODB_INSTALL_SUFFIX: ${{ matrix.pecl-mongodb-suffix }}
+      PECL_IMAGICK_INSTALL_SUFFIX: ${{ matrix.pecl-imagick-suffix }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3

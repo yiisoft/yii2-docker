@@ -59,7 +59,7 @@ RUN install-php-extensions \
         opcache \
         pdo_mysql \
         pdo_pgsql \
-        imagick \
+        imagick${PECL_IMAGICK_INSTALL_SUFFIX} \
         mongodb${PECL_MONGODB_INSTALL_SUFFIX} \
         xdebug${PECL_XDEBUG_INSTALL_SUFFIX}
 
