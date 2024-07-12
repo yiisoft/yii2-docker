@@ -2,7 +2,7 @@
 # ==============================================
 
 ARG PHP_BASE_IMAGE_VERSION
-FROM php:${PHP_BASE_IMAGE_VERSION} as min
+FROM php:${PHP_BASE_IMAGE_VERSION} AS min
 
 # Install required system packages for PHP extensions for Yii 2.0 Framework
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
@@ -34,7 +34,7 @@ RUN chmod 755 \
         /usr/local/bin/docker-php-entrypoint
 
 
-FROM min as dev
+FROM min AS dev
 ARG PECL_IMAGICK_INSTALL_SUFFIX
 ARG PECL_MONGODB_INSTALL_SUFFIX
 ARG PECL_XDEBUG_INSTALL_SUFFIX
@@ -51,18 +51,18 @@ RUN apt-get update && \
 # Install common system packages for PHP extensions recommended for Yii 2.0 Framework
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions \
+        imagick${PECL_IMAGICK_INSTALL_SUFFIX} \
+        mongodb${PECL_MONGODB_INSTALL_SUFFIX} \
+        xdebug${PECL_XDEBUG_INSTALL_SUFFIX} \
+        pdo_mysql \
+        pdo_pgsql \
+        gd \
         pcntl \
         soap \
         zip \
         bcmath \
         exif \
-        gd \
-        opcache \
-        pdo_mysql \
-        pdo_pgsql \
-        imagick${PECL_IMAGICK_INSTALL_SUFFIX} \
-        mongodb${PECL_MONGODB_INSTALL_SUFFIX} \
-        xdebug${PECL_XDEBUG_INSTALL_SUFFIX}
+        opcache
 
 # Add configuration files
 COPY image-files/dev/ /
@@ -86,7 +86,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1 \
     PHP_ENABLE_XDEBUG=0
 
 
-FROM min as nginx-min
+FROM min AS nginx-min
 
 # Install nginx
 RUN apt-get update \
@@ -115,7 +115,7 @@ CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
 EXPOSE 80 443
 
 
-FROM dev as nginx-dev
+FROM dev AS nginx-dev
 
 # Install nginx
 RUN apt-get update \
