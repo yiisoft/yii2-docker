@@ -85,7 +85,7 @@ jobs:
         pwd
         docker version
         docker info
-        docker-compose version
+        docker compose version
     - name: Build Image
       uses: docker/bake-action@v2
       with:
@@ -96,12 +96,12 @@ jobs:
           *.args.X_LEGACY_GD_LIB=${{ matrix.legacy-gd-lib }}
     - name: Test
       run: |
-        docker-compose run --rm php-min php -v | grep "Xdebug" && exit 1
-        docker-compose run --rm php-min php /tests/requirements.php
-        docker-compose run --rm php-dev php /tests/requirements.php
-        docker-compose run --rm -w /yii2 php-dev composer update --prefer-dist
-        docker-compose run --rm -w /yii2 php-dev php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
-        docker-compose run --rm -e PHP_ENABLE_XDEBUG=1 php-dev php -v | grep "Xdebug" || exit 1
+        docker compose run --rm php-min php -v | grep "Xdebug" && exit 1
+        docker compose run --rm php-min php /tests/requirements.php
+        docker compose run --rm php-dev php /tests/requirements.php
+        docker compose run --rm -w /yii2 php-dev composer update --prefer-dist
+        docker compose run --rm -w /yii2 php-dev php -d error_reporting="E_ALL ^ E_DEPRECATED" vendor/bin/phpunit tests/framework/ --exclude db
+        docker compose run --rm -e PHP_ENABLE_XDEBUG=1 php-dev php -v | grep "Xdebug" || exit 1
         docker images
     - name: Login to Docker
       if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master'
