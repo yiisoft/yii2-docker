@@ -39,12 +39,15 @@ jobs:
            experimental: false
          - php-base-image-version: "8.1-apache"
            dockerfile-flavour: "debian"
+           compose-file: "docker-compose.yml,docker-compose.apache.yml"
            experimental: false
          - php-base-image-version: "8.2-apache"
            dockerfile-flavour: "debian"
+           compose-file: "docker-compose.yml,docker-compose.apache.yml"
            experimental: false
          - php-base-image-version: "8.3-apache"
            dockerfile-flavour: "debian"
+           compose-file: "docker-compose.yml,docker-compose.apache.yml"
            pecl-imagick-suffix: "/imagick@master"
            experimental: false
       fail-fast: false
