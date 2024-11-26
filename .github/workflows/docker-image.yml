@@ -37,6 +37,11 @@ jobs:
            compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
            pecl-imagick-suffix: "/imagick@master"
            experimental: false
+         - php-base-image-version: "8.4-fpm"
+           dockerfile-flavour: "debian"
+           compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
+           pecl-imagick-suffix: "/imagick@master"
+           experimental: true
          - php-base-image-version: "8.1-apache"
            dockerfile-flavour: "debian"
            compose-file: "docker-compose.yml,docker-compose.apache.yml"
@@ -50,6 +55,11 @@ jobs:
            compose-file: "docker-compose.yml,docker-compose.apache.yml"
            pecl-imagick-suffix: "/imagick@master"
            experimental: false
+         - php-base-image-version: "8.4-apache"
+           dockerfile-flavour: "debian"
+           compose-file: "docker-compose.yml,docker-compose.apache.yml"
+           pecl-imagick-suffix: "/imagick@master"
+           experimental: true
       fail-fast: false
     env:
       COMPOSE_FILE: ${{ matrix.compose-file }}
