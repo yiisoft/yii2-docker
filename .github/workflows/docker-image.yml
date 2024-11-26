@@ -99,6 +99,7 @@ jobs:
           *.args.X_LEGACY_GD_LIB=${{ matrix.legacy-gd-lib }}
     - name: Test
       run: |
+        docker compose run --rm php-min php -v
         docker compose run --rm php-min php -v | grep "Xdebug" && exit 1
         docker compose run --rm php-min php /tests/requirements.php
         docker compose run --rm php-dev php /tests/requirements.php
