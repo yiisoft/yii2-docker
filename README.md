@@ -54,6 +54,8 @@ Adjust the versions in `.env` if you want to build a specific version.
 
 ## Configuration
 
+- `GITHUB_API_TOKEN` access key for repositories on GitHub
+- `GITLAB_ACCESS_TOKEN` access key for repositories in GitLab
 - `PHP_ENABLE_XDEBUG` whether to load an enable Xdebug, defaults to `0` (false)  *not available in `-min` images*
 - `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`), see also [#15](https://github.com/yiisoft/yii2-docker/issues/15)
 
