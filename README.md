@@ -63,9 +63,67 @@ Adjust the versions in `.env` if you want to build a specific version. See .env-
 
     docker-compose build
 
-## Testing
+## Run services 
 
-    docker-compose run --rm php php /tests/requirements.php
+docker-compose up
+
+## Testing application requirements
+
+    docker-compose run --rm php-dev php /tests/requirements.php
+
+## Apply DB migration
+
+docker-compose run --rm php-dev yii migrate
+
+## Backoffice 
+
+http://localhost:8202/track 
+
+## REST API
+
+http://localhost:8202/api/tracks secured, use Bearer 101-token for development 
+
+#### POST new track
+```
+curl -i -X POST \
+   -H "Authorization:Bearer 101-token" \
+   -H "Content-Type:application/json" \
+   -d \
+'{
+  "track_number": "9876KJGJG8698769",
+  "status": "new"
+}' \
+ 'http://localhost:8202/api/tracks'
+ ```
+#### PATCH existing track
+```
+curl -i -X PATCH \
+   -H "Authorization:Bearer 101-token" \
+   -H "Content-Type:application/json" \
+   -d \
+'{
+  "status": "completed"
+}' \
+ 'http://localhost:8202/api/tracks/1'
+ ```
+
+#### Delete track 
+
+```
+curl -i -X DELETE \
+   -H "Authorization:Bearer 101-token" \
+ 'http://localhost:8202/api/tracks/1'
+ ```
+
+
+#### filter tracks by status
+
+```
+curl -i -X GET \
+   -H "Authorization:Bearer 101-token" \
+   -H "Content-Type:application/json" \
+ 'http://localhost:8202/api/tracks?filter%5Bstatus%5D=new'
+ ```
 
 ### Xdebug
 
