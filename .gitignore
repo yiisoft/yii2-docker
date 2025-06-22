@@ -1,5 +1,5 @@
 .env
 *.swp
-_host-volumes
+_host-volumes/db
 
 \.idea/
