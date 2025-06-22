@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\modules\api\v1;
 
 /**
@@ -15,7 +17,7 @@ class Module extends \yii\base\Module
     /**
      * {@inheritdoc}
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         \Yii::$app->user->enableSession = false;
