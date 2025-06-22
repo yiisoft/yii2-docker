@@ -46,9 +46,9 @@ Development images
 
 ## Setup
 
-    cp .env-dist .env
+    cp .env.example .env
 
-Adjust the versions in `.env` if you want to build a specific version.
+Adjust the versions in `.env` if you want to build a specific version. See .env-dist for details.
 
 > **Note:** Please make sure to use a matching combination of `DOCKERFILE_FLAVOUR` and `PHP_BASE_IMAGE_VERSION`
 
