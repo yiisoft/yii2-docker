@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\models;
 
 use app\common\behaviors\LogBehavior;
@@ -12,7 +14,7 @@ use Yii;
  * @property string $track_number
  * @property string|null $created_at
  * @property string|null $updated_at
- * @property string|null $status
+ * @property string $status
  */
 class Track extends \yii\db\ActiveRecord
 {
@@ -20,7 +22,7 @@ class Track extends \yii\db\ActiveRecord
     const SCENARIO_CREATE = "create";
     const SCENARIO_UPDATE = "update";
 
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -47,7 +49,7 @@ class Track extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'Track';
     }
@@ -55,7 +57,7 @@ class Track extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['updated_at', 'status'], 'default', 'value' => null],
@@ -71,7 +73,7 @@ class Track extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -87,7 +89,7 @@ class Track extends \yii\db\ActiveRecord
      * column status ENUM value labels
      * @return string[]
      */
-    public static function optsStatus()
+    public static function optsStatus(): array
     {
         return [
             self::STATUS_NEW => 'new',
@@ -101,7 +103,7 @@ class Track extends \yii\db\ActiveRecord
     /**
      * @return string
      */
-    public function displayStatus()
+    public function displayStatus(): string
     {
         return self::optsStatus()[$this->status];
     }
@@ -109,12 +111,12 @@ class Track extends \yii\db\ActiveRecord
     /**
      * @return bool
      */
-    public function isStatusNew()
+    public function isStatusNew(): bool
     {
         return $this->status === self::STATUS_NEW;
     }
 
-    public function setStatusToNew()
+    public function setStatusToNew(): void
     {
         $this->status = self::STATUS_NEW;
     }
@@ -122,12 +124,12 @@ class Track extends \yii\db\ActiveRecord
     /**
      * @return bool
      */
-    public function isStatusInprogress()
+    public function isStatusInprogress(): bool
     {
         return $this->status === self::STATUS_IN_PROGRESS;
     }
 
-    public function setStatusToInprogress()
+    public function setStatusToInprogress(): void
     {
         $this->status = self::STATUS_IN_PROGRESS;
     }
@@ -135,12 +137,12 @@ class Track extends \yii\db\ActiveRecord
     /**
      * @return bool
      */
-    public function isStatusCompleted()
+    public function isStatusCompleted(): bool
     {
         return $this->status === self::STATUS_COMPLETED;
     }
 
-    public function setStatusToCompleted()
+    public function setStatusToCompleted(): void
     {
         $this->status = self::STATUS_COMPLETED;
     }
@@ -148,12 +150,12 @@ class Track extends \yii\db\ActiveRecord
     /**
      * @return bool
      */
-    public function isStatusFailed()
+    public function isStatusFailed(): bool
     {
         return $this->status === self::STATUS_FAILED;
     }
 
-    public function setStatusToFailed()
+    public function setStatusToFailed(): void
     {
         $this->status = self::STATUS_FAILED;
     }
@@ -161,12 +163,12 @@ class Track extends \yii\db\ActiveRecord
     /**
      * @return bool
      */
-    public function isStatusCanceled()
+    public function isStatusCanceled(): bool
     {
         return $this->status === self::STATUS_CANCELED;
     }
 
-    public function setStatusToCanceled()
+    public function setStatusToCanceled(): void
     {
         $this->status = self::STATUS_CANCELED;
     }

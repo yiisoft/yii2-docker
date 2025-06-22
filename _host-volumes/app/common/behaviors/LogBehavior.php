@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\common\behaviors;
 
 use yii;
@@ -19,16 +21,16 @@ class LogBehavior extends Behavior
         ];
     }
 
-    public function logCreation(AfterSaveEvent $event)
+    public function logCreation(AfterSaveEvent $event): void
     {
-        $this->log('Created new record:' . print_r($event->sender->attributes, 1));
+        $this->log('Created new record:' . print_r($event->sender->attributes, true));
     }
 
-    public function logDeletion(ModelEvent $event)
+    public function logDeletion(ModelEvent $event): void
     {
-        $this->log('Deleted record:' . print_r($event->sender->id, 1));
+        $this->log('Deleted record:' . print_r($event->sender->id, true));
     }
-    public function logUpdate(AfterSaveEvent $event)
+    public function logUpdate(AfterSaveEvent $event): void
     {
         if (!empty($event->changedAttributes)) {
             $changedAttributesString = 'Changed ';
@@ -39,7 +41,7 @@ class LogBehavior extends Behavior
         }
     }
 
-    protected function log(string $message)
+    protected function log(string $message): void
     {
         Yii::info($message, 'track');
     }

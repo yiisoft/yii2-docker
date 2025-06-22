@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace tests\unit\models;
 
 use app\models\Track;
@@ -10,7 +12,7 @@ use function PHPUnit\Framework\assertTrue;
 
 class TrackTest extends \Codeception\Test\Unit
 {
-    public function testTrackCreation()
+    public function testTrackCreation(): void
     {
         $track = new Track();
         $track->track_number = "unit test track number";
@@ -24,7 +26,7 @@ class TrackTest extends \Codeception\Test\Unit
         assertFalse($track->isStatusCompleted());
     }
 
-    public function testTrackNumberRequiredWithMinAndMaxLength()
+    public function testTrackNumberRequiredWithMinAndMaxLength(): void
     {
         $track = new Track();
         $track->validate('track_number');
@@ -41,7 +43,7 @@ class TrackTest extends \Codeception\Test\Unit
         assertEquals('Track Number should contain at most 255 characters.', $track->getFirstError('track_number'));
     }
 
-    public function testTrackStatusRequiredAndInList()
+    public function testTrackStatusRequiredAndInList(): void
     {
         $track = new Track();
         $track->validate('status');

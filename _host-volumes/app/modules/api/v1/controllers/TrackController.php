@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace app\modules\api\v1\controllers;
 
 use app\models\Track;
@@ -20,7 +22,6 @@ class TrackController extends ActiveController
     public function actionBulkupdate(): array
     {
         $request = Yii::$app->request->getBodyParams();
-        Yii::info(['Query params: '.print_r(Yii::$app->request->getQueryParams(), 1)]);
         $updatedModels = [];
         foreach ($request as $value) {
             Yii::$app->request->setBodyParams($value);
