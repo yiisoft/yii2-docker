@@ -140,7 +140,7 @@ curl -i -X PATCH \
  ![bulkupdate](/images/Bulk%20update.png)
 
 ### Logger
-Track creation, modification & deletion is logged by [LogBehavior](_host-volumes\app\common\behaviors\LogBehavior.php) to separate logfile _host-volumes\app\runtime\logs\track.log
+Track creation, modification & deletion is logged by [LogBehavior](_host-volumes/app/common/behaviors/LogBehavior.php) to separate logfile _host-volumes\app\runtime\logs\track.log
 
 ### UNIT tests 
 current settings & best practices uses separate database to run tests isolated from development & production, so you need to prepare db or change settings in [test_db](https://github.com/ioncode/TrackCOD/blob/8bf943365db799d436b0efd5d26cc654ad2c5c7b/_host-volumes/app/config/test_db.php)
