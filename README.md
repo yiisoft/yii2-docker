@@ -12,6 +12,10 @@ This demo application based on the official [Yii 2.0 Framework](http://www.yiifr
 These Docker images are built on top of the official PHP Docker image, they contain additional PHP extensions required to run Yii 2.0 framework, including basic demo application.
 The `Dockerfile`(s) of this repository are designed to build from different PHP-versions by using *build arguments*.
 
+## Windows EOL settings
+
+Please, check your settings `git config --get core.autocrlf` and disable autocrlf 
+
 ## Setup
 
     cp .env.example .env
@@ -38,6 +42,11 @@ Adjust the versions in `.env` if you want to build a specific version. See .env-
 ## Testing application requirements
 
     docker-compose run --rm php-dev php /tests/requirements.php
+
+## Install dependencies 
+
+    docker-compose run --rm php-dev composer install
+    
 
 ## Apply DB migration
 
