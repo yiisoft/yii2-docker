@@ -9,40 +9,8 @@ This demo application based on the official [Yii 2.0 Framework](http://www.yiifr
 
 ## About
 
-These Docker images are built on top of the official PHP Docker image, they contain additional PHP extensions required to run Yii 2.0 framework, but no code of the framework itself.
+These Docker images are built on top of the official PHP Docker image, they contain additional PHP extensions required to run Yii 2.0 framework, including basic demo application.
 The `Dockerfile`(s) of this repository are designed to build from different PHP-versions by using *build arguments*.
-
-### Available versions for `yiisoftware/yii2-php`
-
-The following images are built on a *weekly* basis for **arm64** and **amd64**. For regular commits on **master** we only build images for **amd64** suffixed with `-latest`/`-latest-min`.
-
-Minimal images
-
-```
-8.3-apache-min, 8.3-fpm-min, 8.3-fpm-nginx-min
-8.2-apache-min, 8.2-fpm-min, 8.2-fpm-nginx-min
-8.1-apache-min, 8.1-fpm-min, 8.1-fpm-nginx-min
-```
-
-Development images
-
-```
-8.3-apache, 8.3-fpm, 8.3-fpm-nginx
-8.2-apache, 8.2-fpm, 8.2-fpm-nginx
-8.1-apache, 8.1-fpm, 8.1-fpm-nginx
-```
-
-#### Deprecated or EOL versions
-
-```
-8.0-*
-7.4-*
-7.3-*
-7.2-*
-7.1-*
-7.0-*
-5.6-*
-```
 
 ## Setup
 
@@ -65,7 +33,7 @@ Adjust the versions in `.env` if you want to build a specific version. See .env-
 
 ## Run services 
 
-docker-compose up
+    docker-compose up
 
 ## Testing application requirements
 
@@ -73,15 +41,20 @@ docker-compose up
 
 ## Apply DB migration
 
-docker-compose run --rm php-dev yii migrate
+    docker-compose run --rm php-dev yii migrate
 
 ## Backoffice 
 
-http://localhost:8202/track 
+    http://localhost:8202/track 
+
+    ![backoffice](/images/Backoffice.png)
 
 ## REST API
 
-http://localhost:8202/api/tracks secured, use Bearer 101-token for development 
+    http://localhost:8202/api/tracks 
+    
+> **Authorization:** use `Bearer 101-token` for development
+
 
 #### POST new track
 ```
@@ -90,12 +63,30 @@ curl -i -X POST \
    -H "Content-Type:application/json" \
    -d \
 '{
-  "track_number": "9876KJGJG8698769",
+  "track_number": "UANNmin5max255",
   "status": "new"
 }' \
  'http://localhost:8202/api/tracks'
  ```
 
+
+
+#### View track by ID
+```
+curl -i -X GET \
+   -H "Authorization:Bearer 101-token" \
+ 'http://localhost:8202/api/tracks/1'
+ ```
+in response you see track structure
+```
+{
+    "id": 1,
+    "track_number": "UANNmin5max255",
+    "created_at": "2025-06-22 09:36:05",
+    "updated_at": null,
+    "status": "new"
+}
+```
 
 #### PATCH existing track
 ```
@@ -146,28 +137,28 @@ curl -i -X PATCH \
 ]' \
  'http://localhost:8202/api/tracks/bulkupdate'
  ```
+ ![bulkupdate](/images/Bulk%20update.png)
 
 ### UNIT tests 
 current settings & best practices uses separate database to run tests isolated from development & production, so you need to prepare db or change settings in [test_db](https://github.com/ioncode/TrackCOD/blob/8bf943365db799d436b0efd5d26cc654ad2c5c7b/_host-volumes/app/config/test_db.php)
 
-connect to db service, using password `root` 
+##### connect to db service, using password `root` 
 ```
 docker-compose run --rm db mysql -h db -u root -p
 ```
-create database & user for tests 
+##### create database & user for tests 
 ```
 create database test;
 CREATE USER 'test' IDENTIFIED BY 'test';
 GRANT ALL ON test.* TO 'test';
 exit;
 ```
-apply migrations on test db 
+##### apply migrations on test db 
 ```
 docker-compose run --rm php-dev php tests/bin/yii migrate
 ```
 
-
-run all tests (including framework base tests)
+##### run all tests (including framework base tests)
 ```
 docker-compose run --rm php-dev /app/vendor/bin/codecept run
 ```
@@ -176,7 +167,7 @@ docker-compose run --rm php-dev /app/vendor/bin/codecept run
 ```
 docker-compose run --rm php-dev /app/vendor/bin/codecept run unit :Track
 ```
-
+![tests](/images/tests.png)
 
 
 
@@ -196,3 +187,23 @@ More information can be found in the [docs](/docs) folder.
 - We do not officially support Alpine images, due to numerous issues with PHP requirements and because framework tests are not passing.
 - Depending on the (Debian) base-image (usually PHP <7.4) you might need to set `X_LEGACY_GD_LIB=1`
 - test
+
+### Available versions for `yiisoftware/yii2-php`
+
+The following images are built on a *weekly* basis for **arm64** and **amd64**. For regular commits on **master** we only build images for **amd64** suffixed with `-latest`/`-latest-min`.
+
+Minimal images
+
+```
+8.3-apache-min, 8.3-fpm-min, 8.3-fpm-nginx-min
+8.2-apache-min, 8.2-fpm-min, 8.2-fpm-nginx-min
+8.1-apache-min, 8.1-fpm-min, 8.1-fpm-nginx-min
+```
+
+Development images
+
+```
+8.3-apache, 8.3-fpm, 8.3-fpm-nginx
+8.2-apache, 8.2-fpm, 8.2-fpm-nginx
+8.1-apache, 8.1-fpm, 8.1-fpm-nginx
+```
