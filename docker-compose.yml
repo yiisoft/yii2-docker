@@ -1,9 +1,17 @@
-version: '2.2'
-
 networks:
   default:
 
 services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: dbname
+    volumes:
+      - ./_host-volumes/db/data:/var/lib/mysql
 
   php-min:
     build:
@@ -40,3 +48,5 @@ services:
     build:
       target: dev
     image: ${PHP_IMAGE_NAME}:${PHP_BASE_IMAGE_VERSION}${PHP_IMAGE_VERSION_SUFFIX}
+    links:
+          - db
