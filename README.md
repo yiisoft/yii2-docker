@@ -47,7 +47,7 @@ Adjust the versions in `.env` if you want to build a specific version. See .env-
 
     http://localhost:8202/track 
 
-    ![backoffice](/images/Backoffice.png)
+![backoffice](/images/Backoffice.png)
 
 ## REST API
 
