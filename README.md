@@ -5,7 +5,7 @@
 
 [![Build Status](https://github.com/yiisoft/yii2-docker/actions/workflows/docker-image.yml/badge.svg)](https://github.com/yiisoft/yii2-docker/actions/workflows/docker-image.yml)
 
-This is the repo of the official [Yii 2.0 Framework](http://www.yiiframework.com/) image on [DockerHub](https://hub.docker.com/r/yiisoftware/yii2-php/) for PHP.
+This demo application based on the official [Yii 2.0 Framework](http://www.yiiframework.com/) image on [DockerHub](https://hub.docker.com/r/yiisoftware/yii2-php/) for PHP.
 
 ## About
 
@@ -95,6 +95,8 @@ curl -i -X POST \
 }' \
  'http://localhost:8202/api/tracks'
  ```
+
+
 #### PATCH existing track
 ```
 curl -i -X PATCH \
@@ -124,6 +126,59 @@ curl -i -X GET \
    -H "Content-Type:application/json" \
  'http://localhost:8202/api/tracks?filter%5Bstatus%5D=new'
  ```
+
+ #### Bulk update 
+
+```
+curl -i -X PATCH \
+   -H "Authorization:Bearer 101-token" \
+   -H "Content-Type:application/json" \
+   -d \
+'[
+  {
+    "status": "completed",
+    "id":2
+  },
+  {
+    "status": "in_progress",
+    "id":3
+  }
+]' \
+ 'http://localhost:8202/api/tracks/bulkupdate'
+ ```
+
+### UNIT tests 
+current settings & best practices uses separate database to run tests isolated from development & production, so you need to prepare db or change settings in [test_db](https://github.com/ioncode/TrackCOD/blob/8bf943365db799d436b0efd5d26cc654ad2c5c7b/_host-volumes/app/config/test_db.php)
+
+connect to db service, using password `root` 
+```
+docker-compose run --rm db mysql -h db -u root -p
+```
+create database & user for tests 
+```
+create database test;
+CREATE USER 'test' IDENTIFIED BY 'test';
+GRANT ALL ON test.* TO 'test';
+exit;
+```
+apply migrations on test db 
+```
+docker-compose run --rm php-dev php tests/bin/yii migrate
+```
+
+
+run all tests (including framework base tests)
+```
+docker-compose run --rm php-dev /app/vendor/bin/codecept run
+```
+
+#### Track unit tests for model & REST API controller 
+```
+docker-compose run --rm php-dev /app/vendor/bin/codecept run unit :Track
+```
+
+
+
 
 ### Xdebug
 
