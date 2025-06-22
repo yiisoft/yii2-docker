@@ -45,7 +45,7 @@ Adjust the versions in `.env` if you want to build a specific version. See .env-
 
 ## Backoffice 
 
-    http://localhost:8202/track 
+Visit web interface http://localhost:8202/track, auth not required  
 
 ![backoffice](/images/Backoffice.png)
 
