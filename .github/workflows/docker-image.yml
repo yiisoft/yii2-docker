@@ -41,7 +41,7 @@ jobs:
            dockerfile-flavour: "debian"
            compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
            experimental: false
-         - php-base-image-version: "8.5-fpm"
+         - php-base-image-version: "8.5-rc-fpm"
            dockerfile-flavour: "debian"
            compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
            pecl-xdebug-suffix: "-beta"
@@ -63,7 +63,7 @@ jobs:
            dockerfile-flavour: "debian"
            compose-file: "docker-compose.yml,docker-compose.apache.yml"
            experimental: false
-         - php-base-image-version: "8.5-apache"
+         - php-base-image-version: "8.5-rc-apache"
            dockerfile-flavour: "debian"
            compose-file: "docker-compose.yml,docker-compose.apache.yml"
            pecl-xdebug-suffix: "-beta"
