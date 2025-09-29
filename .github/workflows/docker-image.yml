@@ -40,6 +40,10 @@ jobs:
          - php-base-image-version: "8.4-fpm"
            dockerfile-flavour: "debian"
            compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
+           experimental: false
+         - php-base-image-version: "8.5-fpm"
+           dockerfile-flavour: "debian"
+           compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
            pecl-xdebug-suffix: "-beta"
            experimental: true
          - php-base-image-version: "8.1-apache"
@@ -56,6 +60,10 @@ jobs:
            pecl-imagick-suffix: "/imagick@master"
            experimental: false
          - php-base-image-version: "8.4-apache"
+           dockerfile-flavour: "debian"
+           compose-file: "docker-compose.yml,docker-compose.apache.yml"
+           experimental: false
+         - php-base-image-version: "8.5-apache"
            dockerfile-flavour: "debian"
            compose-file: "docker-compose.yml,docker-compose.apache.yml"
            pecl-xdebug-suffix: "-beta"
