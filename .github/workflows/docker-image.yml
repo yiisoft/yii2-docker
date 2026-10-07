@@ -149,3 +149,20 @@ jobs:
         push: true
         set: |
           *.platform=linux/amd64,linux/arm64
+
+  keepalive:
+
+    # GitHub disables scheduled workflows after 60 days without repository
+    # activity. Re-enabling the workflow via the API resets that timer
+    # without creating dummy commits.
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+    - name: Re-enable scheduled workflow
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh api --method PUT \
+          "repos/${GITHUB_REPOSITORY}/actions/workflows/docker-image.yml/enable"
