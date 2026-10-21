@@ -67,6 +67,10 @@ Adjust the versions in `.env` if you want to build a specific version.
 - `PHP_ENABLE_XDEBUG` whether to load an enable Xdebug, defaults to `0` (false)  *not available in `-min` images*
 - `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`), see also [#15](https://github.com/yiisoft/yii2-docker/issues/15)
 
+### Upload limits
+
+Request bodies are limited to 64M (`post_max_size=64M`, `upload_max_filesize=60M`, nginx `client_max_body_size 64M`, Apache `LimitRequestBody 67108864`). Previous images allowed 512M, the limit was lowered as a mitigation for CVE-2026-109618. If your application needs larger uploads, raise all values together, e.g. with an additional ini file in `/usr/local/etc/php/conf.d/` and a matching web server setting.
+
 ## Building
 
     docker-compose build
