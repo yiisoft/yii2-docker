@@ -19,6 +19,8 @@ The following images are built on a *weekly* basis for **arm64** and **amd64**. 
 Minimal images
 
 ```
+8.5-apache-min, 8.5-fpm-min, 8.5-fpm-nginx-min
+8.4-apache-min, 8.4-fpm-min, 8.4-fpm-nginx-min
 8.3-apache-min, 8.3-fpm-min, 8.3-fpm-nginx-min
 8.2-apache-min, 8.2-fpm-min, 8.2-fpm-nginx-min
 8.1-apache-min, 8.1-fpm-min, 8.1-fpm-nginx-min
@@ -27,12 +29,18 @@ Minimal images
 Development images
 
 ```
+8.5-apache, 8.5-fpm, 8.5-fpm-nginx
+8.4-apache, 8.4-fpm, 8.4-fpm-nginx
 8.3-apache, 8.3-fpm, 8.3-fpm-nginx
 8.2-apache, 8.2-fpm, 8.2-fpm-nginx
 8.1-apache, 8.1-fpm, 8.1-fpm-nginx
 ```
 
+> **Warning:** PHP 8.1 is end of life and gets no security fixes from the PHP project anymore. The `8.1-*` images are still rebuilt, but remain affected by CVE-2026-109618 and CVE-2026-109619 (PHP2Shell). Do not expose them to untrusted traffic, upgrade to 8.2 or later.
+
 #### Deprecated or EOL versions
+
+No longer rebuilt, no security fixes from PHP (e.g. CVE-2026-109618, CVE-2026-109619).
 
 ```
 8.0-*
@@ -58,6 +66,10 @@ Adjust the versions in `.env` if you want to build a specific version.
 - `GITLAB_ACCESS_TOKEN` access key for repositories in GitLab
 - `PHP_ENABLE_XDEBUG` whether to load an enable Xdebug, defaults to `0` (false)  *not available in `-min` images*
 - `PHP_USER_ID` (Debian only) user ID, when running commands as webserver (`www-data`), see also [#15](https://github.com/yiisoft/yii2-docker/issues/15)
+
+### Upload limits
+
+Request bodies are limited to 64M (`post_max_size=64M`, `upload_max_filesize=60M`, nginx `client_max_body_size 64M`, Apache `LimitRequestBody 67108864`). Previous images allowed 512M, the limit was lowered as a mitigation for CVE-2026-109618. If your application needs larger uploads, raise all values together, e.g. with an additional ini file in `/usr/local/etc/php/conf.d/` and a matching web server setting.
 
 ## Building
 
