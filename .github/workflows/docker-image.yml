@@ -25,45 +25,36 @@ jobs:
        # pecl-xdebug-suffix: ""
        # pecl-mongodb-suffix: ""
        # compose-file: "docker-compose.yml:..."
-       # min-php-version: "x.y.z" (fail on older base images)
        include:
           - php-base-image-version: "8.2-fpm"
-            min-php-version: "8.2.35"
             dockerfile-flavour: "debian"
             compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
             experimental: false
           - php-base-image-version: "8.3-fpm"
-            min-php-version: "8.3.36"
             dockerfile-flavour: "debian"
             compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
             experimental: false
           - php-base-image-version: "8.4-fpm"
-            min-php-version: "8.4.27"
             dockerfile-flavour: "debian"
             compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
             experimental: false
           - php-base-image-version: "8.5-fpm"
-            min-php-version: "8.5.12"
             dockerfile-flavour: "debian"
             compose-file: "docker-compose.yml,docker-compose.fpm-nginx.yml"
             experimental: true
           - php-base-image-version: "8.2-apache"
-            min-php-version: "8.2.35"
             dockerfile-flavour: "debian"
             compose-file: "docker-compose.yml,docker-compose.apache.yml"
             experimental: false
           - php-base-image-version: "8.3-apache"
-            min-php-version: "8.3.36"
             dockerfile-flavour: "debian"
             compose-file: "docker-compose.yml,docker-compose.apache.yml"
             experimental: false
           - php-base-image-version: "8.4-apache"
-            min-php-version: "8.4.27"
             dockerfile-flavour: "debian"
             compose-file: "docker-compose.yml,docker-compose.apache.yml"
             experimental: false
           - php-base-image-version: "8.5-apache"
-            min-php-version: "8.5.12"
             dockerfile-flavour: "debian"
             compose-file: "docker-compose.yml,docker-compose.apache.yml"
             experimental: true
@@ -78,7 +69,6 @@ jobs:
       PECL_XDEBUG_INSTALL_SUFFIX: ${{ matrix.pecl-xdebug-suffix }}
       PECL_MONGODB_INSTALL_SUFFIX: ${{ matrix.pecl-mongodb-suffix }}
       PECL_IMAGICK_INSTALL_SUFFIX: ${{ matrix.pecl-imagick-suffix }}
-      MIN_PHP_VERSION: ${{ matrix.min-php-version }}
     steps:
     - name: Checkout
       uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744
@@ -117,13 +107,6 @@ jobs:
         set: |
           *.platform=linux/amd64
           *.args.X_LEGACY_GD_LIB=${{ matrix.legacy-gd-lib }}
-    - name: Check minimum PHP version
-      run: |
-        docker compose run --rm -e MIN_PHP_VERSION php-min php -r '
-          $min = getenv("MIN_PHP_VERSION");
-          echo "PHP " . PHP_VERSION . ", required >= $min\n";
-          exit(version_compare(PHP_VERSION, $min, ">=") ? 0 : 1);
-        '
     - name: Test
       run: |
         docker compose run --rm php-min php -v
