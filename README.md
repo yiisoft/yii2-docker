@@ -19,22 +19,27 @@ The following images are built on a *weekly* basis for **arm64** and **amd64**. 
 Minimal images
 
 ```
+8.5-apache-min, 8.5-fpm-min, 8.5-fpm-nginx-min
+8.4-apache-min, 8.4-fpm-min, 8.4-fpm-nginx-min
 8.3-apache-min, 8.3-fpm-min, 8.3-fpm-nginx-min
 8.2-apache-min, 8.2-fpm-min, 8.2-fpm-nginx-min
-8.1-apache-min, 8.1-fpm-min, 8.1-fpm-nginx-min
 ```
 
 Development images
 
 ```
+8.5-apache, 8.5-fpm, 8.5-fpm-nginx
+8.4-apache, 8.4-fpm, 8.4-fpm-nginx
 8.3-apache, 8.3-fpm, 8.3-fpm-nginx
 8.2-apache, 8.2-fpm, 8.2-fpm-nginx
-8.1-apache, 8.1-fpm, 8.1-fpm-nginx
 ```
 
 #### Deprecated or EOL versions
 
+No longer rebuilt, no security fixes from PHP (e.g. CVE-2026-109618, CVE-2026-109619).
+
 ```
+8.1-*
 8.0-*
 7.4-*
 7.3-*
