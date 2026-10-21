@@ -36,7 +36,7 @@ Development images
 8.1-apache, 8.1-fpm, 8.1-fpm-nginx
 ```
 
-> **Warning:** PHP 8.1 is end of life and gets no security fixes from the PHP project anymore. The `8.1-*` images are still rebuilt, but remain affected by CVE-2026-109618 and CVE-2026-109619 (PHP2Shell). Do not expose them to untrusted traffic, upgrade to 8.2 or later.
+> **Warning:** PHP 8.1 is end of life and gets no security fixes from the PHP project anymore. The `8.1-*` images are no longer rebuilt and remain affected by CVE-2026-109618 and CVE-2026-109619 (PHP2Shell). Do not expose them to untrusted traffic, upgrade to 8.2 or later.
 
 #### Deprecated or EOL versions
 
