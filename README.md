@@ -69,7 +69,28 @@ Adjust the versions in `.env` if you want to build a specific version.
 
 ### Upload limits
 
-Request bodies are limited to 64M (`post_max_size=64M`, `upload_max_filesize=60M`, nginx `client_max_body_size 64M`, Apache `LimitRequestBody 67108864`). Previous images allowed 512M, the limit was lowered as a mitigation for CVE-2026-109618. If your application needs larger uploads, raise all values together, e.g. with an additional ini file in `/usr/local/etc/php/conf.d/` and a matching web server setting.
+> **Breaking change:** Previous images allowed request bodies up to 512M. Since the PHP2Shell update, they are limited to 64M as a mitigation for CVE-2026-109618. Larger uploads are rejected with HTTP 413 by Apache/nginx, or with `UPLOAD_ERR_INI_SIZE` by PHP.
+
+| Setting | Value | Where |
+|---|---|---|
+| `post_max_size` | `64M` | `/usr/local/etc/php/conf.d/base.ini` |
+| `upload_max_filesize` | `60M` | `/usr/local/etc/php/conf.d/base.ini` |
+| `LimitRequestBody` | `67108864` | `/etc/apache2/sites-available/000-default.conf` (`-apache`) |
+| `client_max_body_size` | `64M` | `/etc/nginx/conf.d/default.conf` (`-fpm-nginx`) |
+
+The [advisory](https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w) asks for a conservative `post_max_size` *and* an independent request size limit at the frontend, because a multipart request without a usable `Content-Length` can get past the `post_max_size` check. If your application needs larger uploads, raise the PHP and the web server limit together:
+
+- **PHP (all images):** add an ini file that sorts after `base.ini`, e.g. `/usr/local/etc/php/conf.d/uploads.ini`:
+  ```ini
+  post_max_size=512M
+  upload_max_filesize=500M
+  ```
+- **`-apache`:** `/app/web` has `AllowOverride All`, so one line in `web/.htaccess` is enough:
+  ```apache
+  LimitRequestBody 536870912
+  ```
+- **`-fpm-nginx`:** `client_max_body_size` is set at server level, so an additional file in `conf.d/` does not override it. Mount your own `/etc/nginx/conf.d/default.conf`.
+- **`-fpm`** behind your own web server: the ini file, plus the limit of that web server.
 
 ## Building
 
