@@ -92,6 +92,10 @@ The [advisory](https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx
 - **`-fpm-nginx`:** `client_max_body_size` is set at server level, so an additional file in `conf.d/` does not override it. Mount your own `/etc/nginx/conf.d/default.conf`.
 - **`-fpm`** behind your own web server: the ini file, plus the limit of that web server.
 
+### Directory listings
+
+Neither `-apache` nor `-fpm-nginx` images generate directory listings for folders below `/app/web` that have no index file, such as `web/assets` or upload directories. If you need them, enable them for a specific folder, e.g. with `Options +Indexes` in a `.htaccess` file of that folder for `-apache`.
+
 ## Building
 
     docker-compose build
